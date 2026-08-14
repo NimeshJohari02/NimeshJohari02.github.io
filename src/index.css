@@ -1,0 +1,5 @@
+html { background: #070907; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+body, button, a { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+button:focus-visible, a:focus-visible { outline: 2px solid #ece7cd; outline-offset: 3px; }
+::selection { background: #9df68b; color: #070907; }
