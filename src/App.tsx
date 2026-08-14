@@ -1,227 +1,254 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
-type Variant = 'desk' | 'cave' | 'handheld'
-type Panel = 'resume' | 'work' | 'projects' | 'legacy' | null
+const panelIds = ['map', 'resume', 'work', 'stories', 'projects', 'learning', 'nerd', 'voice', 'legacy', 'lab'] as const
+type Panel = typeof panelIds[number]
 
-const variants: { id: Variant; label: string }[] = [
-  { id: 'desk', label: 'A — 3D CRT desk' },
-  { id: 'cave', label: 'B — Pixel nerd cave' },
-  { id: 'handheld', label: 'C — Handheld lab' },
-]
-
-const DeskScene = lazy(() => import('./DeskScene'))
 const base = import.meta.env.BASE_URL
 
-function initialVariant(): Variant {
-  const candidate = new URLSearchParams(window.location.search).get('variant')
-  return variants.some(({ id }) => id === candidate) ? (candidate as Variant) : 'desk'
+const destinations: { id: Panel; label: string; hint: string; className: string }[] = [
+  { id: 'resume', label: 'RESUME.EXE', hint: 'The useful PDF stuff', className: 'resume' },
+  { id: 'work', label: 'WORK.LOG', hint: 'Habuild · Freecharge · BYJU\'S', className: 'work' },
+  { id: 'projects', label: 'PROJECTS/', hint: 'Public things I have built', className: 'projects' },
+  { id: 'learning', label: 'LEARNING/', hint: 'DSA, Java, systems and rabbit holes', className: 'learning' },
+  { id: 'nerd', label: 'NERD.STUFF', hint: 'Tiling windows since before it was cool', className: 'nerd' },
+  { id: 'voice', label: 'VOICE.WORKFLOWS', hint: 'I talk to computers. A lot.', className: 'voice' },
+  { id: 'legacy', label: 'LEGACY.HTML', hint: 'The handmade pre-AI website', className: 'legacy' },
+  { id: 'stories', label: 'PRODUCTION.STORIES', hint: 'Things broke. I followed the evidence.', className: 'stories' },
+]
+
+const artworkControls = [
+  ['terminal', 'nerd', 'Terminal: nerd stuff'],
+  ['logs', 'work', 'Logs: work history'],
+  ['achievements', 'stories', 'Achievements: production stories'],
+  ['about', 'resume', 'About Nimesh'],
+  ['settings', 'nerd', 'Settings: tools and workflows'],
+  ['dock-resume', 'resume', 'Resume'],
+  ['dock-projects', 'projects', 'Projects'],
+  ['dock-map', 'map', 'Map'],
+] as const
+
+const projects = [
+  ['ARTIX DOTFILES', 'BSPWM, XMonad, Polybar, Neovim and years of refusing to place windows by hand.', 'https://github.com/NimeshJohari02/artix-dotfiles'],
+  ['NOTESCLI', 'A focused command-line notes app, built because three clicks felt excessive.', 'https://github.com/NimeshJohari02/NotesCLI'],
+  ['LIGHTS OUT', 'A small React game. Not every repository needs to become a startup.', 'https://github.com/NimeshJohari02/LightsOutReact'],
+  ['BOXMAKER', 'It makes a useless div. No regrets.', 'https://github.com/NimeshJohari02/BoxMaker'],
+]
+
+function panelFromHash(): Panel | null {
+  const hash = window.location.hash.slice(1) as Panel
+  return panelIds.includes(hash) ? hash : null
 }
 
 function App() {
-  const [variant, setVariant] = useState<Variant>(initialVariant)
-  const [panel, setPanel] = useState<Panel>(null)
-
-  const selectVariant = (next: Variant) => {
-    const url = new URL(window.location.href)
-    url.searchParams.set('variant', next)
-    window.history.replaceState({}, '', url)
-    setPanel(null)
-    setVariant(next)
-  }
+  const [panel, setPanel] = useState<Panel | null>(panelFromHash)
 
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setPanel(null)
-        return
-      }
-      const target = event.target as HTMLElement | null
-      if (target?.matches('input, textarea, [contenteditable="true"]')) return
-      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
-      const current = variants.findIndex(({ id }) => id === variant)
-      const offset = event.key === 'ArrowRight' ? 1 : -1
-      selectVariant(variants[(current + offset + variants.length) % variants.length].id)
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [variant])
+    const syncPanel = () => setPanel(panelFromHash())
+    window.addEventListener('hashchange', syncPanel)
+    return () => window.removeEventListener('hashchange', syncPanel)
+  }, [])
+
+  const closePanel = () => {
+    history.replaceState(null, '', `${window.location.pathname}${window.location.search}`)
+    setPanel(null)
+  }
 
   return (
-    <main className={`prototype prototype--${variant}`}>
-      <a className="skip-link" href="#prototype-content">Skip to portfolio controls</a>
+    <main className="os-shell">
+      <a className="skip-link" href="#map">Skip the room; open the directory</a>
+
       <header className="system-bar">
-        <a className="brand" href="?variant=desk" onClick={(event) => { event.preventDefault(); selectVariant('desk') }}>
-          NIMESH//OS
-        </a>
+        <a className="brand" href="./" aria-label="Nimesh OS home">NIMESH//OS</a>
         <span className="system-status"><i /> HUMAN-DIRECTED · AI-ACCELERATED</span>
-        <nav aria-label="Portfolio shortcuts">
-          <button type="button" onClick={() => setPanel('resume')}>F1 RESUME</button>
-          <button type="button" onClick={() => setPanel('work')}>WORK.LOG</button>
+        <nav aria-label="Primary navigation">
+          <a href="#resume">RESUME</a>
+          <a href="#work">WORK.LOG</a>
+          <a href="#map">EXPLORE</a>
           <a href="mailto:nimeshjohari95@gmail.com">CONTACT</a>
         </nav>
       </header>
 
-      <section id="prototype-content" className="stage" aria-label={`${variant} portfolio concept`}>
-        {variant === 'desk' && (
-          <DeskVariant onBoot={() => selectVariant('cave')} onOpen={setPanel} />
-        )}
-        {variant === 'cave' && (
-          <CaveVariant onHandheld={() => selectVariant('handheld')} onOpen={setPanel} />
-        )}
-        {variant === 'handheld' && (
-          <HandheldVariant onExit={() => selectVariant('cave')} onOpen={setPanel} />
-        )}
+      <section className="cave" aria-labelledby="cave-title">
+        <img src={`${base}concepts/nerd-cave.webp`} alt="" />
+        <div className="cave-shade" />
+        <div className="cave-heading">
+          <p>NIMESH JOHARI · AI POD TECH LEAD</p>
+          <h1 id="cave-title">THE NERD CAVE</h1>
+        </div>
+
+        <div className="desktop-hotspots" aria-label="Objects in the Nerd Cave">
+          {destinations.map(({ id, label, hint, className }) => (
+            <a className={`hotspot hotspot--${className}`} href={`#${id}`} key={id}>
+              <span>{label}<small>{hint}</small></span>
+            </a>
+          ))}
+          {artworkControls.map(([className, target, label]) => (
+            <a className={`artwork-control artwork-control--${className}`} href={`#${target}`} aria-label={label} key={className} />
+          ))}
+        </div>
+
+        <nav className="mobile-directory" aria-label="Nerd Cave directory">
+          <p>ROOM DIRECTORY</p>
+          {destinations.map(({ id, label, hint }) => (
+            <a href={`#${id}`} key={id}><b>{label}</b><span>{hint}</span></a>
+          ))}
+        </nav>
+
+        <div className="terminal-strip">
+          <span>$ 8 objects online</span>
+          <span>click the room or open <a href="#map">EXPLORE</a>_</span>
+        </div>
       </section>
 
-      {panel && <InfoPanel panel={panel} onClose={() => setPanel(null)} />}
-      {import.meta.env.DEV && (
-        <PrototypeSwitcher current={variant} onSelect={selectVariant} />
-      )}
+      {panel && <InfoPanel panel={panel} onClose={closePanel} />}
     </main>
   )
 }
 
-function DeskVariant({ onBoot, onOpen }: { onBoot: () => void; onOpen: (panel: Panel) => void }) {
-  const lightweight = useLightweightMode()
-  return (
-    <div className="desk-variant">
-      <img className="desk-poster" src={`${base}concepts/crt-desk.webp`} alt="" />
-      {!lightweight && (
-        <Suspense fallback={<div className="loading">LOADING LOW-POLY DESK…</div>}>
-          <DeskScene />
-        </Suspense>
-      )}
-      <div className="boot-window crt-surface">
-        <p className="eyebrow">NIMESH BIOS v02.95</p>
-        <h1>NIMESH//OS</h1>
-        <dl className="boot-checks">
-          <div><dt>BACKEND NERD</dt><dd>DETECTED</dd></div>
-          <div><dt>AI POD</dt><dd>ONLINE</dd></div>
-          <div><dt>WINDOW TILING</dt><dd>ENFORCED</dd></div>
-          <div><dt>COFFEE</dt><dd className="warning">NOT FOUND</dd></div>
-        </dl>
-        <div className="boot-actions">
-          <button type="button" className="primary" onClick={onBoot}>ENTER: BOOT</button>
-          <button type="button" onClick={() => onOpen('resume')}>F1: RESUME</button>
-          <button type="button" onClick={() => onOpen('legacy')}>LEGACY.HTML</button>
-        </div>
-      </div>
-      <p className="concept-caption">A — Actual WebGL scene with an immediate résumé escape hatch.</p>
-    </div>
-  )
-}
+function InfoPanel({ panel, onClose }: { panel: Panel; onClose: () => void }) {
+  const ref = useRef<HTMLDialogElement>(null)
 
-function useLightweightMode() {
-  const query = '(max-width: 760px), (prefers-reduced-motion: reduce)'
-  const [lightweight, setLightweight] = useState(() => window.matchMedia(query).matches)
   useEffect(() => {
-    const media = window.matchMedia(query)
-    const update = () => setLightweight(media.matches)
-    media.addEventListener('change', update)
-    return () => media.removeEventListener('change', update)
+    ref.current?.showModal()
   }, [])
-  return lightweight
-}
 
-function CaveVariant({ onHandheld, onOpen }: { onHandheld: () => void; onOpen: (panel: Panel) => void }) {
   return (
-    <div className="cave-variant">
-      <img src={`${base}concepts/nerd-cave.webp`} alt="Pixel-art developer room with computers, servers, notebooks and project shelves" />
-      <div className="cave-shade" />
-      <h1 className="cave-title">THE NERD CAVE</h1>
-      <button className="hotspot hotspot--resume" type="button" onClick={() => onOpen('resume')}>▣ RESUME.EXE</button>
-      <button className="hotspot hotspot--work" type="button" onClick={() => onOpen('work')}>▤ WORK.LOG</button>
-      <button className="hotspot hotspot--projects" type="button" onClick={() => onOpen('projects')}>▥ PROJECTS/</button>
-      <button className="hotspot hotspot--legacy" type="button" onClick={() => onOpen('legacy')}>▱ PRE_AI.FLOPPY</button>
-      <button className="hotspot hotspot--handheld" type="button" onClick={onHandheld}>▦ GLITCH//LAB</button>
-      <div className="terminal-strip" aria-live="polite">$ welcome nimesh-os.dev — click an object or type <b>help</b> later_</div>
-      <p className="concept-caption">B — Spatial navigation; every hotspot also exists in the keyboard-safe top bar.</p>
-    </div>
+    <dialog
+      ref={ref}
+      className="info-panel crt-surface"
+      aria-labelledby="panel-title"
+      onClose={onClose}
+      onMouseDown={(event) => { if (event.target === event.currentTarget) ref.current?.close() }}
+    >
+      <header>
+        <p id="panel-title">{panelTitles[panel]}</p>
+        <button type="button" aria-label="Close window" onClick={() => ref.current?.close()}>ESC ×</button>
+      </header>
+      <div className="panel-body">{panelContent[panel]}</div>
+    </dialog>
   )
 }
 
-function HandheldVariant({ onExit, onOpen }: { onExit: () => void; onOpen: (panel: Panel) => void }) {
-  const [move, setMove] = useState('Choose a diagnostic move.')
+const panelTitles: Record<Panel, string> = {
+  map: 'MAP.EXE · EVERYTHING WORKS WITHOUT THE MAP TOO',
+  resume: 'RESUME.EXE',
+  work: 'WORK.LOG',
+  stories: 'PRODUCTION.STORIES',
+  projects: 'PROJECTS/',
+  learning: 'LEARNING/',
+  nerd: 'NERD.STUFF',
+  voice: 'VOICE.WORKFLOWS',
+  legacy: 'LEGACY.HTML · PRE-AI ARTIFACT',
+  lab: 'GLITCH//LAB',
+}
+
+const panelContent: Record<Panel, React.ReactNode> = {
+  map: (
+    <div className="directory-grid">
+      {destinations.map(({ id, label, hint }) => (
+        <a href={`#${id}`} key={id}><b>{label}</b><span>{hint}</span></a>
+      ))}
+      <a href="#lab"><b>GLITCH//LAB</b><span>A tiny incident-response toy</span></a>
+    </div>
+  ),
+  resume: (
+    <div className="resume-panel">
+      <p className="lede">AI Pod Tech Lead. Backend engineer. Friendly Neighborhood AI Prompt Tuner.</p>
+      <p>I build production agent systems, distributed backends and the boring reliability machinery that keeps both useful.</p>
+      <div className="panel-links">
+        <a href="https://www.linkedin.com/in/nimeshjohari02/" target="_blank" rel="noreferrer">LINKEDIN ↗</a>
+        <a href="https://github.com/NimeshJohari02" target="_blank" rel="noreferrer">GITHUB ↗</a>
+      </div>
+    </div>
+  ),
+  work: (
+    <div className="timeline">
+      <article><time>2026 — NOW</time><h2>Habuild · AI Pod Tech Lead</h2><p>Lead a three-developer Pod across agent architecture, delivery, PR quality, model evaluation, observability, cost and production reliability.</p><p>Started in the CRM engineering Pod, working on ordered messaging, retries, duplicate prevention, caching, search and recovery before moving into AI.</p></article>
+      <article><time>2024 — 2026</time><h2>Freecharge · Senior Software Engineer, Backend</h2><p>Led 3–4 backend engineers on credit-card acquisition. Built event-driven journeys with SQS, Redis and Elasticsearch; shipped reliability, experimentation and recovery work.</p></article>
+      <article><time>2022 — 2024</time><h2>BYJU'S · Member of Technical Staff 1</h2><p>Built Java/Spring Boot catalog, payment and order services, then onboarding and chatbot workflows that made common support problems self-serve.</p></article>
+    </div>
+  ),
+  stories: (
+    <div className="story-grid">
+      <article><p>01 · OBSERVABILITY</p><h2>The disk that ate the traces</h2><span>Co-led recovery and retention work for self-hosted Langfuse/ClickHouse. Trace storage fell from 175 GiB to 12 GiB without turning observability off.</span></article>
+      <article><p>02 · RELEASES</p><h2>Four hundred files apart</h2><span>Led cleanup of a roughly 400-file staging/main divergence and restored a controlled promotion path.</span></article>
+      <article><p>03 · CORRECTNESS</p><h2>An AI answer is not proof</h2><span>Hardened agent flows around validation, tool identity, ambiguous outcomes and authoritative readback before claiming that an action succeeded.</span></article>
+      <article><p>04 · RETRIEVAL</p><h2>Memory needs boring machinery</h2><span>Worked across durable workers, lifecycle controls and hybrid retrieval—not just prompts—to make memory and knowledge dependable.</span></article>
+      <article><p>05 · CRM</p><h2>Replies must arrive in order</h2><span>Shipped queue-backed multi-response delivery with bounded retries and duplicate-call protection for a high-throughput messaging system.</span></article>
+      <article><p>06 · DEBUGGING</p><h2>Follow the whole failure</h2><span>Trace input, routing, tools, state, downstream effects and delivery. Preserve “unknown” when telemetry ends instead of inventing an RCA.</span></article>
+      <article><p>07 · MODELS</p><h2>Changing the engine mid-flight</h2><span>Rolled GPT-5.6 Luna through the production agent runtime with capability checks, fallback boundaries and model identity in observability.</span></article>
+      <article><p>08 · PERFORMANCE</p><h2>One grouped read beats a query fan-out</h2><span>Collapsed repeated eligibility lookups into a grouped query on a high-read path, then used planner and runtime evidence to validate the result.</span></article>
+      <article><p>09 · MIGRATION</p><h2>Deletion comes last</h2><span>Designed migration gates around one serving authority, effect-free shadowing, idempotency, canaries, rollback and proof before retirement.</span></article>
+      <article><p>10 · ENGINEERING SYSTEMS</p><h2>Review the code that will actually run</h2><span>Introduced AI-assisted exact-head review gates inside the Pod and led cleanup of release drift before adding more features.</span></article>
+    </div>
+  ),
+  projects: (
+    <div className="project-list">
+      {projects.map(([name, description, url]) => (
+        <a href={url} target="_blank" rel="noreferrer" key={name}><b>{name} ↗</b><span>{description}</span></a>
+      ))}
+      <p className="muted">Older experiments stay visible. Bigger systems get showcased only after they build, run and survive an honest review.</p>
+    </div>
+  ),
+  learning: (
+    <div>
+      <p className="lede">College placements are anxious. My coping mechanism was code.</p>
+      <p>I kept DSA implementations, C/C++ exercises and early web experiments so the learning trail stays honest. Current rabbit holes include Java internals, distributed systems, agent evaluation and whatever broke in production this week.</p>
+      <p>I learn by running the thing, breaking the thing, reading why it broke, and leaving notes for future me.</p>
+    </div>
+  ),
+  nerd: (
+    <div>
+      <p className="lede">I automate tiny annoyances with unreasonable enthusiasm.</p>
+      <ul className="plain-list">
+        <li>Linux and macOS windows tile themselves. Manually arranging them feels like packet loss.</li>
+        <li>I built this portfolio's ancestor by hand and kept it alive as evidence.</li>
+        <li>I use AI heavily, review its code, test its claims and argue with its prompts.</li>
+        <li>New model, weird CLI, better shortcut? I will probably try it before lunch.</li>
+      </ul>
+      <div className="panel-links"><a href="#lab">OPEN GLITCH//LAB →</a></div>
+    </div>
+  ),
+  voice: (
+    <div>
+      <p className="lede">Typing is optional. Thinking is not.</p>
+      <p>I use speech-to-text to dump context fast, text-to-speech to review long material, and terminal agents to turn rough intent into something testable. The loop is simple: talk, inspect, correct, run.</p>
+      <p>The machine accelerates the hands. I still own the judgment.</p>
+    </div>
+  ),
+  legacy: (
+    <div>
+      <p className="lede">Before AI completed everyone's sentences, I completed my own divs.</p>
+      <p>This is the portfolio I wrote by hand: old values, old CSS, honest origin story. It stays exactly where it is.</p>
+      <div className="panel-links">
+        <a className="primary" href="https://nimeshjohari02.github.io/myportfolio/" target="_blank" rel="noreferrer">OPEN THE 2021 SITE ↗</a>
+        <a href="https://github.com/NimeshJohari02/myportfolio" target="_blank" rel="noreferrer">VIEW SOURCE ↗</a>
+      </div>
+    </div>
+  ),
+  lab: <GlitchLab />,
+}
+
+function GlitchLab() {
+  const [result, setResult] = useState('LATENCY appeared. Choose a diagnostic move.')
   const moves = {
-    TRACE: 'Trace found the slow edge: model → tool → retry loop.',
-    CACHE: 'Cache hit. Latency lost 38 HP. Numbers are fictional in this prototype.',
-    ROLLBACK: 'Rollback restored the last boringly reliable release.',
-    'PROMPT TUNE': 'Prompt tuned. Hallucination is confused but not defeated.',
+    TRACE: 'Trace found the slow edge. Suspicion is now evidence.',
+    CACHE: 'Cache checked. It was innocent this time.',
+    ROLLBACK: 'Last boringly reliable release restored.',
+    'PROMPT TUNE': 'Prompt improved. Hallucination remains undefeated, but annoyed.',
   }
 
   return (
-    <div className="handheld-variant">
-      <div className="handheld-device" aria-hidden="true">
-        <div className="device-screen">
-          <header><b>GLITCH//LAB</b><span>DEV-01</span></header>
-          <div className="duel">
-            <div className="glitch-creature">▓<i>░</i><i>▒</i></div>
-            <strong>VS</strong>
-            <div className="latency-creature">⌁⌁⌁<i>BUG</i></div>
-          </div>
-          <div className="device-meter"><span>GLITCH</span><progress max="100" value="72" /></div>
-          <div className="device-meter"><span>LATENCY</span><progress max="100" value="88" /></div>
-        </div>
-        <div className="device-controls"><span className="dpad">✣</span><span>SELECT</span><span>RUN</span><i>A</i><i>B</i></div>
+    <div className="glitch-lab">
+      <div className="duel" aria-hidden="true"><span>▓░▒</span><b>VS</b><span>⌁BUG⌁</span></div>
+      <p className="battle-log" aria-live="polite">{result}</p>
+      <div className="move-grid">
+        {Object.entries(moves).map(([move, message]) => (
+          <button type="button" key={move} onClick={() => setResult(message)}>{move}</button>
+        ))}
       </div>
-      <section className="diagnostic-console" aria-label="GLITCH LAB controls">
-        <p className="eyebrow">GLITCH//LAB · OPTIONAL EASTER EGG</p>
-        <h1>LATENCY appeared.</h1>
-        <p className="battle-log" aria-live="polite">{move}</p>
-        <div className="move-grid">
-          {Object.entries(moves).map(([name, result]) => (
-            <button type="button" key={name} onClick={() => setMove(result)}>{name}</button>
-          ))}
-        </div>
-        <div className="handheld-actions">
-          <button type="button" onClick={() => onOpen('projects')}>PROJECT CARTRIDGES</button>
-          <button type="button" className="primary" onClick={onExit}>BACK TO NIMESH//OS</button>
-        </div>
-      </section>
-      <p className="concept-caption">C — Projects become diagnostic cartridges; play is optional.</p>
     </div>
-  )
-}
-
-function InfoPanel({ panel, onClose }: { panel: Exclude<Panel, null>; onClose: () => void }) {
-  const content = {
-    resume: {
-      title: 'RESUME.EXE',
-      body: <><p>AI Pod Tech Lead building agentic AI and distributed backend systems.</p><p>Previously: backend delivery at Freecharge and platform systems at BYJU'S.</p><p className="muted">One-page and two-page PDF slots will connect after the résumé task is finalized.</p></>,
-    },
-    work: {
-      title: 'WORK.LOG',
-      body: <ul><li><b>Habuild:</b> AI Pod leadership, production AI, CRM engineering and reliability.</li><li><b>Freecharge:</b> credit-card acquisition and backend delivery.</li><li><b>BYJU'S:</b> catalog, payments, orders, onboarding and chatbot systems.</li></ul>,
-    },
-    projects: {
-      title: 'PROJECTS/',
-      body: <ul><li>Artix Linux dotfiles and the window-tiling rabbit hole.</li><li>NotesCLI and small tools built because three clicks were too many.</li><li>Public project laboratory—correctness first, impressive README second.</li></ul>,
-    },
-    legacy: {
-      title: 'LEGACY.HTML · PRE-AI ARTIFACT',
-      body: <><p>Built by hand before AI started completing everyone's sentences.</p><p>No agents. No copilots. Just HTML, CSS, Stack Overflow and unreasonable confidence.</p><div className="panel-links"><a className="primary" href="https://nimeshjohari02.github.io/myportfolio/" target="_blank" rel="noreferrer">OPEN ORIGINAL PORTFOLIO ↗</a><a href="https://github.com/NimeshJohari02/myportfolio" target="_blank" rel="noreferrer">VIEW SOURCE ↗</a></div></>,
-    },
-  }[panel]
-
-  return (
-    <div className="panel-backdrop" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) onClose() }}>
-      <section className="info-panel crt-surface" role="dialog" aria-modal="true" aria-labelledby="panel-title">
-        <header><h2 id="panel-title">{content.title}</h2><button type="button" aria-label="Close window" onClick={onClose}>×</button></header>
-        <div className="panel-body">{content.body}</div>
-      </section>
-    </div>
-  )
-}
-
-function PrototypeSwitcher({ current, onSelect }: { current: Variant; onSelect: (variant: Variant) => void }) {
-  const currentIndex = variants.findIndex(({ id }) => id === current)
-  return (
-    <aside className="prototype-switcher" aria-label="Prototype variant switcher">
-      <button type="button" aria-label="Previous concept" onClick={() => onSelect(variants[(currentIndex + variants.length - 1) % variants.length].id)}>←</button>
-      <span>PROTOTYPE: {variants[currentIndex].label}</span>
-      <button type="button" aria-label="Next concept" onClick={() => onSelect(variants[(currentIndex + 1) % variants.length].id)}>→</button>
-    </aside>
   )
 }
 

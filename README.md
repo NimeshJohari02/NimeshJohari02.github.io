@@ -1,21 +1,12 @@
-# NIMESH//OS — UI prototype
+# NIMESH//OS — The Nerd Cave
 
-Throwaway prototype answering one question: which interface makes Nimesh's
-portfolio fun without hiding the useful information?
+Nimesh Johari's retro, interactive portfolio. One room, eight clickable objects,
+and a normal directory for anyone who does not want to hunt through pixel art.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Switch with the bottom control, arrow keys, or URL:
-
-- `?variant=desk` — actual WebGL CRT desk
-- `?variant=cave` — pixel-art spatial navigation
-- `?variant=handheld` — optional diagnostic-game interface
-
-The original hand-built portfolio remains untouched and is linked as
-`LEGACY.HTML`: <https://nimeshjohari02.github.io/myportfolio/>.
-
-This code is deliberately a prototype. After Nimesh uses it, keep the winning
-interaction decisions and rewrite the production surface cleanly.
+The original hand-built 2021 portfolio remains untouched at
+<https://nimeshjohari02.github.io/myportfolio/> and is linked as `LEGACY.HTML`.
