@@ -1,0 +1,180 @@
+% !TeX program = pdflatex
+% Recovered working copy for the two-page resume refresh.
+% Standalone on Overleaf: all former external SVG icons use Font Awesome.
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.530in}
+\addtolength{\evensidemargin}{-0.375in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.65in}
+\addtolength{\textheight}{.75in}
+
+\urlstyle{rm}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-6pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
+
+\newcommand{\resumeItem}[2]{
+  \item\small{\textbf{#1}{: #2 \vspace{-2pt}}}
+}
+\newcommand{\resumeSubheading}[4]{
+  \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      {#3} & {#4} \\
+    \end{tabular*}
+}
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-3pt}}
+\renewcommand{\labelitemii}{$\circ$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=blue,
+  citecolor=black,
+  urlcolor=blue
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \textbf{Nimesh Kumar Johari}} \\
+  \faAt\ \href{mailto:nimeshjohari95@gmail.com}{nimeshjohari95@gmail.com} \\
+  \faGithub\ \href{https://github.com/NimeshJohari02}{GitHub} ~|~
+  \faLinkedin\ \href{https://www.linkedin.com/in/nimeshjohari02/}{LinkedIn} ~|~
+  \faCode\ \href{https://leetcode.com/nimeshjohari02/}{LeetCode (600+)} ~|~
+  \faCode\ \href{https://codeforces.com/profile/nimesh_02}{Codeforces}
+\end{center}
+
+\begin{center}
+\small AI Pod Tech Lead and backend engineer with \textbf{4 years} building high-throughput distributed systems and production AI platforms across LangGraph, AWS SQS, ClickHouse, Qdrant, Redis, and Postgres.
+\end{center}
+\vspace{-10pt}
+
+\section{~~Experience}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {AI Pod Tech Lead}{}
+    {\textbf{Habuild -- AI Platform}}{\faCalendar\ Apr '26 -- Present}
+    {\small\textbf{Tech:} Python, LangGraph, Langfuse, ClickHouse, OpenAI/Gemini, Qdrant, Redis, Postgres\par}
+    \begin{itemize}
+      \item{Lead a \textbf{3-engineer AI team}, owning architecture, delivery, pull-request quality, production reliability, incidents, and cost for a LangGraph platform with \textbf{10+ agents} and \textbf{23 tools} serving \textbf{320K+ user queries/day}}
+      \vspace{-2pt}
+      \item{Rolled out the \textbf{GPT-5.6 Luna large language model} across the production AI platform, making model and prompt versions traceable in observability}
+      \vspace{-2pt}
+      \item{Co-led recovery and storage optimization of a \textbf{self-hosted AI observability stack (Langfuse/ClickHouse)}, reducing trace storage from \textbf{175 GiB to 12 GiB} (\textbf{93\%})}
+      \vspace{-2pt}
+      \item{Diagnosed a production PostgreSQL deployment deadlock using \textbf{224 log events} and validated composite indexes for partitioned chat-history queries, eliminating filtered rows in tested plans (\textbf{156/117 to 0})}
+      \vspace{-2pt}
+      \item{Built and deployed asynchronous memory and knowledge pipelines using \textbf{SQS/EventBridge}, AWS MemoryDB, and hybrid semantic/keyword retrieval in Qdrant; seeded all \textbf{406 knowledge records} and validated \textbf{2,779 passing tests}}
+      \vspace{-2pt}
+      \item{Reduced legacy AI-backend logs from \textbf{84,674 to 417} in controlled pre/post-deployment validation, targeting \textbf{\textasciitilde\$14/day} savings; replaced a \textbf{6$\times$N query pattern with one grouped query} on a path associated with \textbf{\textasciitilde40M reads}}
+      \vspace{-2pt}
+      \item{Led cleanup of an approximately \textbf{400-file divergence between release branches} and introduced commit-pinned AI-assisted pull-request review gates within the team; trained \textbf{200+ colleagues} on AI-assisted engineering workflows}
+      \vspace{-2pt}
+      \item{Designed a staged migration from a legacy AI assistant to a new agent platform across CRM and business services, using safe shadow validation, idempotent processing, canary rollout, and rollback controls}
+    \end{itemize}
+
+  \resumeSubheading
+    {Software Development Engineer 2}{}
+    {\textbf{Habuild -- CRM Platform}}{\faCalendar\ Feb '26 -- Mar '26}
+    {\small\textbf{Tech:} TypeScript, NestJS, AWS Keyspaces, Elasticsearch, Redis, Kafka, RabbitMQ, AWS SQS/SNS\par}
+    \begin{itemize}
+      \item{Built a high-volume WhatsApp CRM backend using \textbf{AWS Keyspaces} for durable history, \textbf{Elasticsearch} for live state/search, Redis for control state, and Kafka/SQS/RabbitMQ for asynchronous processing}
+      \vspace{-2pt}
+      \item{Stabilized \textbf{3 high-value NestJS routes} with \textbf{75 tests}, replacing legacy endpoints failing \textbf{96--100\%} of requests; identified an Elasticsearch mapping regression within \textbf{35 minutes} of deployment}
+      \vspace{-2pt}
+      \item{Shipped production \textbf{SQS-backed ordered delivery for multi-message AI replies}, carrying retry state in each message to preserve compatibility and prevent duplicate AI calls across bounded retries}
+      \vspace{-2pt}
+      \item{Led a production race-condition audit across Redis, Elasticsearch, SQS/Kafka, and Firestore, identifying \textbf{23 unique concurrency defects} across high-volume chatbot and webhook delivery paths}
+    \end{itemize}
+    \vspace{-4pt}
+
+  \newpage
+
+  \resumeSubheading
+    {Senior Software Engineer -- Backend}{}
+    {\textbf{Freecharge}}{\faCalendar\ Feb '24 -- Jan '26}
+    {\small\textbf{Tech:} Node.js, JavaScript, AWS, Redis, MongoDB, Elasticsearch, SQS\par}
+    \begin{itemize}
+      \item{Led \textbf{3--4 backend engineers} on a credit-card acquisition and onboarding funnel, owning system/component design, sprint planning, stakeholder alignment, and delivery under aggressive deadlines}
+      \vspace{-2pt}
+      \item{Spearheaded architecture across AWS SQS, Redis, and Elasticsearch for queue-backed journeys, cache-backed workflows, and search-backed verification paths}
+      \vspace{-2pt}
+      \item{Standardized backend service templates with custom linting and security checks, reducing review time by \textbf{50\%} while enforcing consistent service patterns}
+      \vspace{-2pt}
+      \item{Diagnosed and resolved production race conditions with optimistic concurrency checks and atomic database updates, eliminating critical state-inconsistency bugs}
+      \vspace{-2pt}
+      \item{Developed event-driven drop-off retargeting with scheduled AWS SQS workflows, bringing \textbf{27\% of users} back via 40\% WhatsApp, 40\% SMS, and 20\% email}
+      \vspace{-2pt}
+      \item{Integrated Elasticsearch reverse lookup into employment verification, cutting average organization-match latency by approximately \textbf{60\%}}
+      \vspace{-2pt}
+      \item{Implemented Redis-backed one-time-password notification caching and configurable retry/hard-block rate limits to reduce flooding and abuse risk}
+      \vspace{-2pt}
+      \item{Designed stateless A/B experimentation using deterministic application bucketing and idempotent recovery from external downtime, boosting funnel efficiency by \textbf{32\%}}
+    \end{itemize}
+    \vspace{-4pt}
+
+  \resumeSubheading
+    {Member of Technical Staff 1}{}
+    {\textbf{BYJU'S}}{\faCalendar\ Sep '22 -- Jan '24}
+    {\small\textbf{Tech:} Java, Spring Boot, Node.js, TypeScript, Python, AWS, GCP, Postgres\par}
+    \begin{itemize}
+      \item{Built scalable Java/Spring Boot APIs across catalog, payment, and order-management microservices, supporting \textbf{200 requests/second} on high-traffic endpoints}
+      \vspace{-2pt}
+      \item{Built end-to-end onboarding and chatbot modules, reducing technical-support queries by \textbf{40\%} through self-serve resolution and automated guidance}
+      \vspace{-2pt}
+      \item{Authored system architecture and sequence diagrams for the order-processing backend, aligning API design, payment flows, and operational handoffs before implementation}
+      \vspace{-2pt}
+      \item{Tuned PostgreSQL queries and indexes for approximately \textbf{38\% faster reads} on high-traffic endpoints}
+    \end{itemize}
+\resumeSubHeadingListEnd
+
+\section{~~Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {Vellore Institute of Technology}{\faMapMarker\ Vellore, India}
+    {Bachelor of Technology -- Information Technology; \textbf{GPA: 8.90}}{}
+\resumeSubHeadingListEnd
+
+\section{~~Skills Summary}
+\resumeSubHeadingListStart
+  \resumeSubItem{Languages}{Java, Python, C/C++, JavaScript, TypeScript, Golang, SQL}
+  \resumeSubItem{Frameworks}{Spring Boot, Node.js, Django, Flask, GORM, React, LangGraph, LangChain}
+  \resumeSubItem{Messaging}{Kafka, RabbitMQ, AWS SQS, AWS SNS}
+  \resumeSubItem{Databases}{Cassandra, ClickHouse, Qdrant, Redis, Postgres, MongoDB, MySQL, Elasticsearch}
+  \resumeSubItem{Cloud \& DevOps}{AWS, GCP, Kubernetes, Docker, Helm, Argo, GitHub Actions, CI/CD}
+  \resumeSubItem{AI}{OpenAI, Gemini, Langfuse, Agentic AI, LLM Orchestration, Function Calling, LLM Evaluation}
+\resumeSubHeadingListEnd
+\vspace{-4pt}
+
+\section{~~Achievements}
+\resumeSubHeadingListStart
+  \item{Global Rank \textbf{6995} in \textbf{Google KickStart 2021 (Round G)}}
+  \vspace{-1pt}
+  \item{Solved \textbf{600+ problems} on \href{https://leetcode.com/nimeshjohari02/}{\textbf{LeetCode}}}
+\resumeSubHeadingListEnd
+
+\end{document}

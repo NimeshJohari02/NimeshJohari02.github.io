@@ -10,6 +10,8 @@ const links = {
   email: 'mailto:nimeshjohari95@gmail.com',
   github: 'https://github.com/NimeshJohari02',
   linkedin: 'https://www.linkedin.com/in/nimeshjohari02/',
+  onePageResume: `${base}resume/one-page-resume.pdf`,
+  twoPageResume: `${base}resume/two-page-resume.pdf`,
 } as const
 
 const destinations: { id: Panel; label: string; hint: string; className: string }[] = [
@@ -65,7 +67,6 @@ function App() {
       <a className="skip-link" href="#map">Skip the room; open the directory</a>
 
       <header className="system-bar">
-        <a className="brand" href="./" aria-label="Nimesh OS home">NIMESH//OS</a>
         <span className="system-status"><i /> HUMAN-DIRECTED · AI-ACCELERATED</span>
         <nav aria-label="Primary navigation">
           <a href="#resume">RESUME</a>

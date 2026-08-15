@@ -19,7 +19,7 @@ button { color: inherit; }
 .system-bar {
   min-height: 56px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 1rem;
   padding: .6rem 1rem;
@@ -29,7 +29,6 @@ button { color: inherit; }
   inset: 0 0 auto;
   z-index: 40;
 }
-.brand { color: var(--phosphor); font-weight: 800; text-decoration: none; letter-spacing: .08em; }
 .system-status { color: var(--phosphor-dim); font-size: .7rem; letter-spacing: .08em; }
 .system-status i { display: inline-block; width: .5rem; height: .5rem; border-radius: 50%; background: var(--phosphor); box-shadow: 0 0 12px var(--phosphor); }
 .system-bar nav { display: flex; gap: .25rem; }
