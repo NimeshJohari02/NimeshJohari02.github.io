@@ -8,6 +8,7 @@ type Story = readonly [tag: string, title: string, body: string]
 const links = {
   email: 'mailto:nimeshjohari95@gmail.com',
   github: 'https://github.com/NimeshJohari02',
+  leetcodeGrind: 'https://github.com/NimeshJohari02/LeetCodeGrind',
   linkedin: 'https://www.linkedin.com/in/nimeshjohari02/',
 } as const
 
@@ -187,6 +188,7 @@ const panelContent: Record<Panel, React.ReactNode> = {
       <p className="lede">College placements are anxious. My coping mechanism was code.</p>
       <p>I kept DSA implementations, C/C++ exercises and early web experiments so the learning trail stays honest. Current rabbit holes include Java internals, distributed systems, agent evaluation and whatever broke in production this week.</p>
       <p>I learn by running the thing, breaking the thing, reading why it broke, and leaving notes for future me.</p>
+      <div className="panel-links"><a className="primary" href={links.leetcodeGrind} target="_blank" rel="noreferrer">OPEN LEETCODE GRIND ↗</a></div>
     </div>
   ),
   nerd: (
