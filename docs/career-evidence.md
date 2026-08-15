@@ -40,6 +40,7 @@ Snapshot date: 15 August 2026.
 ## Personal identity
 
 - Friendly Neighborhood AI Prompt Tuner: playful personal tagline, not a formal job title.
+- Google Kick Start 2021 Round G global rank 6995: user-approved public achievement backed by a public certificate link. The exact certificate URL may appear only in both TeX resume sources, not in the website build.
 - Uses AI heavily while reviewing code, testing claims, and owning the final judgment.
 - Uses speech-to-text, text-to-speech, terminal agents, Linux/macOS tiling workflows, and small automations as practical productivity tools.
 - The original hand-built pre-AI portfolio remains part of the public history.

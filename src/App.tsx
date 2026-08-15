@@ -76,7 +76,7 @@ function App() {
       </header>
 
       <section className="intro" aria-labelledby="page-title">
-        <p className="eyebrow">THE NERD CAVE · NIMESH//OS</p>
+        <p className="eyebrow">THE NERD CAVE</p>
         <h1 id="page-title">Nimesh Johari</h1>
         <p className="role">AI Pod Tech Lead · Production Agent Systems · Distributed Backends</p>
         <p className="proof">I lead a three-developer AI Pod across architecture, delivery, reliability, evaluation, observability and cost.</p>

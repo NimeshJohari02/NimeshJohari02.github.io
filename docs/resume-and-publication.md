@@ -15,7 +15,7 @@ They are not website inputs. Overleaf or a local TeX tool may compile them outsi
 
 The public website presents a curated career dossier as native semantic HTML in `src/App.tsx`. It is selectable, searchable, screen-reader-readable, keyboard-operable, responsive, and printable without a PDF viewer or image fallback.
 
-The Vite build must not compile, copy, embed, rasterize, expose, or link a resume PDF or resume image. It must not contain Drive or Bitly recruiter links. Email is the public direct-contact channel; LinkedIn and GitHub remain public profile links.
+The Vite build must not compile, copy, embed, rasterize, expose, or link a resume PDF or resume image. It must not contain Drive or Bitly recruiter links. The exact user-approved Google Kick Start certificate URL may remain in both TeX sources, but it must not enter the website build. Email is the public direct-contact channel; LinkedIn and GitHub remain public profile links.
 
 Career facts shown in the HTML experience come from `docs/career-evidence.md`. Preserve ownership wording and approved precision; never invent, round, or silently strengthen a claim.
 

@@ -20,7 +20,7 @@ This repository is the public source for Nimesh Johari's portfolio and resume ar
 
 - `resume/one-page-resume.tex` and `resume/two-page-resume.tex` are phone-free editable sources for Nimesh's separate resume-authoring workflow.
 - The public website renders the career experience as native semantic HTML. Its build must not compile, copy, embed, rasterize, expose, or link resume PDFs or resume images.
-- Never put a Drive URL, Bitly URL, recruiter PDF, generated resume artifact, or telephone number in the public page, repository, build output, or Git history.
+- Never put a recruiter/private-distribution Drive URL, Bitly URL, recruiter PDF, generated resume artifact, or telephone number in the public page, repository, build output, or Git history. The exact user-approved Google Kick Start certificate URL may appear only in the two TeX resume sources; it must not enter the website build.
 - Recruiter PDFs and their private distribution links remain completely outside this repository and website.
 - Uploading/replacing Drive files or changing either Bitly destination is a separate external action requiring approval and readback.
 
