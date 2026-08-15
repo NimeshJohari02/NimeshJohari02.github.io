@@ -26,6 +26,8 @@ This repository is the public source for Nimesh Johari's portfolio and resume ar
 ## Change discipline
 
 - Keep the retro Nerd Cave accessible without requiring hover, function keys, or pixel-perfect pointer use.
+- Browser-test every spatial hotspot with a real pointer click as well as keyboard activation; semantic links and direct hashes do not prove that overlapping hitboxes work.
 - Prefer native browser features, current dependencies, and the smallest correct change.
 - Run `npm run check` before committing.
+- Treat the automated safety scan as a guard, not proof. Review the complete staged diff and generated artifacts before making the repository public.
 - Do not purchase a domain, create a remote repository, change repository visibility, deploy, or push without explicit approval.

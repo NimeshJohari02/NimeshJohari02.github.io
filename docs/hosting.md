@@ -8,6 +8,14 @@ GitHub Pages is the default because this is a static Vite site and the existing 
 
 Important boundary: GitHub Pages is available from public repositories on GitHub Free. Hosting Pages from a private repository requires an eligible paid GitHub plan. The repository therefore needs a complete public-safety review before it becomes public.
 
+### Private-source pricing
+
+- A personal private source repository requires GitHub Pro, currently $4 USD/month. The deployed Pages site is still public by default; only the repository source stays private.
+- GitHub Pro includes 3,000 private GitHub Actions minutes/month. This static portfolio should use only a small fraction of that allowance.
+- A genuinely access-controlled Pages site requires an organization on GitHub Enterprise Cloud. GitHub currently lists Enterprise from $21 USD/user/month; this is unnecessary for a public portfolio.
+
+These are plan prices, not a purchase recommendation. Taxes, currency conversion, and future pricing can change, so verify the upgrade screen before paying.
+
 The minimal deployment path is:
 
 1. Create a public `nimesh-os` repository after the safety check passes.
@@ -43,6 +51,9 @@ References:
 - [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 - [GitHub Pages custom domains](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages)
 - [GitHub domain verification](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages)
+- [GitHub plan pricing](https://github.com/pricing)
+- [GitHub plan usage allowances](https://docs.github.com/en/billing/reference/product-usage-included)
+- [GitHub Pages site visibility](https://docs.github.com/en/enterprise-cloud@latest/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site)
 - [Cloudflare Registrar](https://developers.cloudflare.com/registrar/)
 - [Spaceship `.com` pricing](https://www.spaceship.com/domains/gtld/com/)
 - [ICANN domain-security guidance](https://www.icann.org/en/blogs/details/do-you-have-a-domain-name-heres-what-you-need-to-know-30-4-2020-en)
