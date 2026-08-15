@@ -21,9 +21,9 @@ if find . \( -path './.git' -o -path './node_modules' \) -prune -o -type f \
   exit 1
 fi
 
-if rg -q --hidden -g '!node_modules/**' -g '!.git/**' -g '!resume/*.tex' \
+if rg -q --hidden -g '!node_modules/**' -g '!.git/**' \
   "$distribution_link_pattern" .; then
-  echo "Private distribution link found outside the approved certificate sources." >&2
+  echo "Private distribution link found. Public repository check failed." >&2
   exit 1
 fi
 
@@ -38,17 +38,10 @@ while IFS= read -r commit; do
     exit 1
   fi
 
-  while IFS= read -r match; do
-    [[ -n "$match" ]] || continue
-    file_path="${match#*:}"
-    case "$file_path" in
-      resume/one-page-resume.tex|resume/two-page-resume.tex) ;;
-      *)
-        echo "Private distribution link found in reachable Git history." >&2
-        exit 1
-        ;;
-    esac
-  done < <(git grep -I -l -E "$distribution_link_pattern" "$commit" -- || true)
+  if git grep -I -q -E "$distribution_link_pattern" "$commit" --; then
+    echo "Private distribution link found in reachable Git history." >&2
+    exit 1
+  fi
 done < <(git rev-list --all)
 
 if git rev-list --objects --all | awk '$2 ~ /^public\/resume\// || $2 ~ /(^|\/)[^\/]*resume[^\/]*\.(pdf|png|jpg|jpeg|webp|avif)$/ { found=1 } END { exit !found }'; then

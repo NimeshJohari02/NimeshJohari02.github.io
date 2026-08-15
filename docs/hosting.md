@@ -16,14 +16,13 @@ Important boundary: GitHub Pages is available from public repositories on GitHub
 
 These are plan prices, not a purchase recommendation. Taxes, currency conversion, and future pricing can change, so verify the upgrade screen before paying.
 
-The minimal deployment path is:
+The selected deployment path is:
 
-1. Create a public `nimesh-os` repository after the safety check passes.
+1. Create the public `NimeshJohari02/NimeshJohari02.github.io` repository after the safety check passes.
 2. Push the reviewed local history only after approval.
-3. Use a GitHub Actions Pages workflow to install dependencies, build the Vite site, and deploy `dist/`.
-4. Add a custom domain only after the GitHub Pages URL works.
-
-Do not add a deployment workflow before the remote repository and visibility decision exist. It would be untestable configuration with no owner yet.
+3. Use `.github/workflows/deploy-pages.yml` to install dependencies, build the Vite site, and deploy `dist/`.
+4. Serve it at `https://nimeshjohari02.github.io/` and set that URL as the GitHub profile website after successful deployment and readback.
+5. Add a custom domain only after the GitHub Pages URL works.
 
 ## Domain
 
@@ -47,6 +46,7 @@ Buy one `.com`, not a defensive bundle of `.com`, `.in`, `.dev`, and other varia
 
 References:
 
+- [Vite static deployment](https://vite.dev/guide/static-deploy.html)
 - [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 - [GitHub Pages custom domains](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages)
 - [GitHub domain verification](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages)
