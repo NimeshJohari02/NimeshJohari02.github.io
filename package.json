@@ -8,9 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "resume:build": "./scripts/build-resumes.sh",
     "safety": "./scripts/check-public-safety.sh",
-    "check": "npm run safety && npm run resume:build && npm run lint && npm run build"
+    "check": "npm run safety && npm run lint && npm run build"
   },
   "dependencies": {
     "react": "^19.2.8",

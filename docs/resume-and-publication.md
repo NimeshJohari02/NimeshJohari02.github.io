@@ -1,36 +1,30 @@
 # Resume source and publication
 
-## Source of truth
+## Authoring sources
 
 There are two intentional resume products:
 
 - `resume/one-page-resume.tex`: the concise recruiter version.
 - `resume/two-page-resume.tex`: the deeper technical version.
 
-These TeX files are the only editable resume sources. Generated PDFs under `public/resume/` are outputs, not parallel documents. The two layouts currently share content manually because their space constraints and bullet selection differ; a shared data abstraction should be introduced only if real content drift becomes recurring.
+These phone-free TeX files support Nimesh's separate resume-authoring workflow. The two layouts share content manually because their space constraints and bullet selection differ; introduce shared data only if real content drift becomes recurring.
 
-## Build and verification
+They are not website inputs. Overleaf or a local TeX tool may compile them outside the public-site workflow, but generated PDFs must stay outside `public/`, `dist/`, tracked files, and Git history.
 
-Run:
+## Website career experience
 
-```bash
-npm run resume:build
-```
+The public website presents a curated career dossier as native semantic HTML in `src/App.tsx`. It is selectable, searchable, screen-reader-readable, keyboard-operable, responsive, and printable without a PDF viewer or image fallback.
 
-The script uses Tectonic, writes both PDFs to `public/resume/`, and rejects page-count drift. Visual changes should also be rendered to images and inspected before publication.
+The Vite build must not compile, copy, embed, rasterize, expose, or link a resume PDF or resume image. It must not contain Drive or Bitly recruiter links. Email is the public direct-contact channel; LinkedIn and GitHub remain public profile links.
 
-The canonical sources were captured on 15 August 2026 after normalizing the AI role title to `AI Pod Tech Lead`:
+Career facts shown in the HTML experience come from `docs/career-evidence.md`. Preserve ownership wording and approved precision; never invent, round, or silently strengthen a claim.
 
-- One page: SHA-256 `2c039ca93d1c9381f3bf98b5a9dd80630c2aa82ca13a8db6ddcf740c4e28655c`
-- Two page: SHA-256 `293a324f049e4152164e122f4bbd3e074d058f0bdbdc5e47edc305b8da977832`
+## Private recruiter distribution
 
-## Website and Drive
+Recruiter PDFs are managed and versioned privately outside this repository. Their aliases, destinations, files, and private contact details must never appear in the repository, website, documentation, tests, generated bundle, or Git history.
 
-The website serves repository-built PDFs so code controls the rendered artifact. The existing Google Drive files remain shareable mirrors:
+Uploading or replacing a recruiter file and changing a private alias are separate external actions. Each requires explicit approval and destination readback.
 
+## Public-data boundary
 
-Replacing a Drive file is a manual external publication step. After replacement, open both links in a signed-out browser and verify the correct page count and download access. A future embedded viewer should use the browser's native PDF support; a custom PDF-viewer dependency is unnecessary.
-
-## Public-data decision
-
-The email address and telephone number in the TeX sources are intentionally public resume contact details. Credentials, environment values, private evidence links, and company internals are never permitted.
+Email is the public contact method. Telephone numbers, recruiter PDFs, credentials, environment values, private evidence links, and company internals are never permitted in the repository.

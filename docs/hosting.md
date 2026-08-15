@@ -21,8 +21,7 @@ The minimal deployment path is:
 1. Create a public `nimesh-os` repository after the safety check passes.
 2. Push the reviewed local history only after approval.
 3. Use a GitHub Actions Pages workflow to install dependencies, build the Vite site, and deploy `dist/`.
-4. Keep generated resume PDFs in `public/resume/` so Vite copies them into the deployed site.
-5. Add a custom domain only after the GitHub Pages URL works.
+4. Add a custom domain only after the GitHub Pages URL works.
 
 Do not add a deployment workflow before the remote repository and visibility decision exist. It would be untestable configuration with no owner yet.
 

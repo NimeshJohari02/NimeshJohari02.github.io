@@ -14,14 +14,15 @@ This repository is the public source for Nimesh Johari's portfolio and resume ar
 - Never invent or round a number without Nimesh's approval. Preserve ownership words exactly: `led`, `co-led`, `built`, `reviewed`, and `designed` are not interchangeable.
 - Public title: `AI Pod Tech Lead`. Do not add `SDE 3`. Do not append `SDE 2` to the public title.
 - Nimesh joined Habuild in February 2026, worked first in the CRM engineering Pod, and then moved to the AI Pod. Do not describe this as customer-support work.
-- The telephone number in the resume is intentionally public. Everything else still follows the public boundary.
+- Never store or publish Nimesh's telephone number in this repository, its generated artifacts, configuration, documentation, or Git history.
 
 ## Resume contract
 
-- `resume/one-page-resume.tex` and `resume/two-page-resume.tex` are the editable sources.
-- `public/resume/*.pdf` are generated artifacts. Never edit a PDF directly.
-- Run `npm run resume:build` after any TeX change. It must produce exactly one and two pages respectively.
-- Drive links are distribution mirrors, not editable sources. Uploading/replacing Drive files is a separate external action requiring approval.
+- `resume/one-page-resume.tex` and `resume/two-page-resume.tex` are phone-free editable sources for Nimesh's separate resume-authoring workflow.
+- The public website renders the career experience as native semantic HTML. Its build must not compile, copy, embed, rasterize, expose, or link resume PDFs or resume images.
+- Never put a Drive URL, Bitly URL, recruiter PDF, generated resume artifact, or telephone number in the public page, repository, build output, or Git history.
+- Recruiter PDFs and their private distribution links remain completely outside this repository and website.
+- Uploading/replacing Drive files or changing either Bitly destination is a separate external action requiring approval and readback.
 
 ## Change discipline
 

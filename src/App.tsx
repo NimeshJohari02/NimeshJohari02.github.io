@@ -5,17 +5,16 @@ const panelIds = ['map', 'resume', 'work', 'stories', 'projects', 'learning', 'n
 type Panel = typeof panelIds[number]
 type Story = readonly [tag: string, title: string, body: string]
 
-const base = import.meta.env.BASE_URL
 const links = {
   email: 'mailto:nimeshjohari95@gmail.com',
   github: 'https://github.com/NimeshJohari02',
   linkedin: 'https://www.linkedin.com/in/nimeshjohari02/',
-  onePageResume: `${base}resume/one-page-resume.pdf`,
-  twoPageResume: `${base}resume/two-page-resume.pdf`,
 } as const
 
+const base = import.meta.env.BASE_URL
+
 const destinations: { id: Panel; label: string; hint: string; className: string }[] = [
-  { id: 'resume', label: 'RESUME.EXE', hint: 'The useful PDF stuff', className: 'resume' },
+  { id: 'resume', label: 'RESUME.EXE', hint: 'Native career dossier', className: 'resume' },
   { id: 'work', label: 'WORK.LOG', hint: 'Habuild · Freecharge · BYJU\'S', className: 'work' },
   { id: 'projects', label: 'PERSONAL.ARTIFACTS', hint: 'Useful tools, old experiments, honest context', className: 'projects' },
   { id: 'learning', label: 'LEARNING/', hint: 'DSA, Java, systems and rabbit holes', className: 'learning' },
@@ -67,7 +66,7 @@ function App() {
       <a className="skip-link" href="#map">Skip the room; open the directory</a>
 
       <header className="system-bar">
-        <span className="system-status"><i /> HUMAN-DIRECTED · AI-ACCELERATED</span>
+        <span className="system-status"><i /> EIGHT REAL HOTSPOTS · HOVER OPTIONAL · TAB WORKS</span>
         <nav aria-label="Primary navigation">
           <a href="#resume">RESUME</a>
           <a href="#stories">PRODUCTION STORIES</a>
@@ -113,7 +112,6 @@ function App() {
             <a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
           </div>
         </nav>
-        <p className="scene-help">Eight real hotspots. Hover is optional; Tab works.</p>
       </section>
 
       {panel && <InfoPanel panel={panel} onClose={closePanel} />}
@@ -147,7 +145,7 @@ function InfoPanel({ panel, onClose }: { panel: Panel; onClose: () => void }) {
 
 const panelTitles: Record<Panel, string> = {
   map: 'MAP.EXE · EVERYTHING WORKS WITHOUT THE MAP TOO',
-  resume: 'RESUME.EXE',
+  resume: 'RESUME.EXE · CAREER.LOG',
   work: 'WORK.LOG',
   stories: 'PRODUCTION.STORIES',
   projects: 'PERSONAL.ARTIFACTS',
@@ -167,19 +165,7 @@ const panelContent: Record<Panel, React.ReactNode> = {
       <a href="#lab"><b>GLITCH//LAB</b><span>A tiny incident-response toy</span></a>
     </div>
   ),
-  resume: (
-    <div className="resume-panel">
-      <p className="lede">AI Pod Tech Lead. Backend engineer. Friendly Neighborhood AI Prompt Tuner.</p>
-      <p>I build production agent systems, distributed backends and the boring reliability machinery that keeps both useful.</p>
-      <div className="panel-links">
-        <a className="primary" href={links.onePageResume} target="_blank" rel="noreferrer">ONE-PAGE RESUME ↗</a>
-        <a href={links.twoPageResume} target="_blank" rel="noreferrer">TWO-PAGE RESUME ↗</a>
-        <a href={links.linkedin} target="_blank" rel="noreferrer">LINKEDIN ↗</a>
-        <a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
-        <a href={links.email}>EMAIL ME</a>
-      </div>
-    </div>
-  ),
+  resume: <ResumePanel />,
   work: (
     <div className="timeline">
       <article><time>2026 — NOW</time><h2>Habuild · AI Pod Tech Lead</h2><p>Lead a three-developer Pod across agent architecture, delivery, PR quality, model evaluation, observability, cost and production reliability.</p><p>Started in the CRM engineering Pod, working on ordered messaging, retries, duplicate prevention, caching, search and recovery before moving into AI.</p></article>
@@ -207,7 +193,7 @@ const panelContent: Record<Panel, React.ReactNode> = {
     <div>
       <p className="lede">I automate tiny annoyances with unreasonable enthusiasm.</p>
       <ul className="plain-list">
-        <li>Linux and macOS windows tile themselves. Manually arranging them feels like packet loss.</li>
+        <li>Years of Linux tiling window managers made keyboard navigation the default. macOS now tiles itself too; manually arranging windows feels like packet loss.</li>
         <li>I built this portfolio's ancestor by hand and kept it alive as evidence.</li>
         <li>I use AI heavily, review its code, test its claims and argue with its prompts.</li>
         <li>New model, weird CLI, better shortcut? I will probably try it before lunch.</li>
@@ -217,9 +203,9 @@ const panelContent: Record<Panel, React.ReactNode> = {
   ),
   voice: (
     <div>
-      <p className="lede">Typing is optional. Thinking is not.</p>
-      <p>I use speech-to-text to dump context fast, text-to-speech to review long material, and terminal agents to turn rough intent into something testable. The loop is simple: talk, inspect, correct, run.</p>
-      <p>The machine accelerates the hands. I still own the judgment.</p>
+      <p className="lede">A keyboard is occasionally the slow fallback path.</p>
+      <p>Flow currently clocks me at <strong>154 WPM</strong>—top <strong>0.1%</strong>—with <strong>126,503 words</strong> dictated across <strong>45 apps</strong>. I use speech-to-text for context dumps, prompts and rough specs.</p>
+      <p>Text-to-speech handles long rereads; then I inspect the diff, run the tests and keep the judgment manual.</p>
     </div>
   ),
   legacy: (
@@ -249,6 +235,100 @@ function StoriesPanel() {
         <summary>VIEW 7 MORE STORIES ↓</summary>
         <div className="story-grid">{stories.slice(3).map(renderStory)}</div>
       </details>
+    </div>
+  )
+}
+
+function ResumePanel() {
+  return (
+    <div className="career-log">
+      <div className="career-status">
+        <span><i /> CAREER.LOG</span>
+        <span>STATUS: OPEN TO CONVERSATIONS</span>
+      </div>
+
+      <section className="career-scan" aria-labelledby="career-scan-title">
+        <p className="career-path">~/quick-scan</p>
+        <h3 id="career-scan-title">AI Pod Tech Lead · Backend engineer · Friendly Neighborhood AI Prompt Tuner</h3>
+        <p>I build production agent systems, distributed backends and the boring reliability machinery that keeps both useful.</p>
+        <ul className="career-facts">
+          <li><b>NOW</b><span>Leading a three-developer AI Pod at Habuild</span></li>
+          <li><b>FOCUS</b><span>Agent systems, distributed backends, reliability</span></li>
+          <li><b>PATH</b><span>BYJU'S → Freecharge → Habuild</span></li>
+        </ul>
+      </section>
+
+      <div className="career-browser">
+        <aside className="career-tree" aria-label="Career file tree">
+          <p>~/career/</p>
+          <ol>
+            <li>now-habuild-ai.log</li>
+            <li>2026-habuild-crm.log</li>
+            <li>2024-freecharge.log</li>
+            <li>2022-byjus.log</li>
+            <li>systems.cfg</li>
+            <li>achievements.log</li>
+          </ol>
+        </aside>
+
+        <div className="career-records">
+          <details open>
+            <summary><span>now-habuild-ai.log</span><small>AI POD TECH LEAD · 2026—NOW</small></summary>
+            <div className="career-entry">
+              <p>Lead three developers across agent architecture, delivery, review quality, model evaluation, observability, cost and production reliability.</p>
+              <p>Productionized a LangGraph multi-agent platform across prompts, routing, tools, memory, evaluation and observability.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>2026-habuild-crm.log</span><small>CRM ENGINEERING · FROM FEB 2026</small></summary>
+            <div className="career-entry">
+              <p>Started at Habuild in the CRM engineering Pod, building ordered multi-response messaging over SQS with retries, duplicate prevention, caching, search, escalation and recovery.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>2024-freecharge.log</span><small>SENIOR SOFTWARE ENGINEER · 2024—2026</small></summary>
+            <div className="career-entry">
+              <p>Led 3–4 backend engineers on credit-card acquisition and owned design, planning, stakeholder alignment and delivery.</p>
+              <p>Shipped event-driven journeys and reliability controls with SQS, Redis, MongoDB and Elasticsearch; brought 27% of drop-off users back and reduced organization-lookup latency by approximately 60%.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>2022-byjus.log</span><small>MEMBER OF TECHNICAL STAFF 1 · 2022—2024</small></summary>
+            <div className="career-entry">
+              <p>Built Java and Spring Boot catalog, order, payment and cancellation services, plus onboarding and support automation using Node.js, TypeScript and Python.</p>
+              <p>Shipped APIs supporting 200 requests/second, self-serve automation that reduced technical-support queries by 40%, and database work that made reads approximately 38% faster.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>systems.cfg</span><small>WHAT I BUILD WITH</small></summary>
+            <div className="career-entry career-columns">
+              <p><b>AGENTS</b><span>LangGraph, prompts, routing, tools, memory, evaluation, observability</span></p>
+              <p><b>BACKENDS</b><span>Java, Python, TypeScript, SQS, Redis, MongoDB, PostgreSQL, Elasticsearch</span></p>
+              <p><b>OPERATIONS</b><span>Evidence-first debugging, safe migrations, review gates, production reliability</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>achievements.log</span><small>SELECTED SYSTEM OUTCOMES</small></summary>
+            <ul className="career-entry plain-list">
+              <li>Co-led Langfuse and ClickHouse reliability work that reduced storage from 175 GiB to 12 GiB.</li>
+              <li>Led cleanup of an approximately 400-file staging/main divergence and restored a controlled release path.</li>
+              <li>Rolled GPT-5.6 Luna into the production agent runtime with capability and observability guardrails.</li>
+              <li>Trained 200+ colleagues on Claude Code and AI-assisted workflows.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+
+      <div className="panel-links">
+        <a className="primary" href={links.email}>EMAIL ME</a>
+        <a href={links.linkedin} target="_blank" rel="noreferrer">LINKEDIN ↗</a>
+        <a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
+      </div>
     </div>
   )
 }

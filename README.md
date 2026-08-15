@@ -12,8 +12,8 @@ npm run check
 The portfolio, public career evidence, and LaTeX resume sources live together:
 
 - [`docs/career-evidence.md`](docs/career-evidence.md) controls public career claims.
-- [`resume/`](resume/) contains the editable one-page and two-page TeX sources.
-- [`public/resume/`](public/resume/) contains generated PDFs served by the site.
+- [`resume/`](resume/) contains phone-free one-page and two-page TeX sources for a separate authoring workflow.
+- The website presents the career dossier as native semantic HTML; its public build contains no resume PDFs or resume images.
 - [`docs/hosting.md`](docs/hosting.md) records the GitHub Pages and domain plan.
 
 The original hand-built 2021 portfolio remains untouched at
