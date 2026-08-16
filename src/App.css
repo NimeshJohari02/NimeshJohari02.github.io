@@ -119,11 +119,32 @@ button { color: inherit; }
 .career-columns p { display: grid; align-content: start; gap: .25rem; }
 .career-columns b { color: var(--amber); font-size: .68rem; letter-spacing: .06em; }
 
-.directory-grid, .project-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: .7rem; }
-.directory-grid a, .project-list a { display: grid; gap: .2rem; min-height: 86px; align-content: center; padding: 1rem; border: 1px solid var(--line); color: var(--phosphor); text-decoration: none; background: rgba(157, 246, 139, .035); }
-.directory-grid a:hover, .directory-grid a:focus-visible, .project-list a:hover, .project-list a:focus-visible { border-color: var(--amber); outline: none; background: rgba(240, 193, 110, .1); }
-.directory-grid span, .project-list span { color: var(--paper); font-size: .8rem; }
-.project-list > p { grid-column: 1 / -1; }
+.directory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .7rem; }
+.directory-grid a { display: grid; gap: .2rem; min-height: 86px; align-content: center; padding: 1rem; border: 1px solid var(--line); color: var(--phosphor); text-decoration: none; background: rgba(157, 246, 139, .035); }
+.directory-grid a:hover, .directory-grid a:focus-visible { border-color: var(--amber); outline: none; background: rgba(240, 193, 110, .1); }
+.directory-grid span { color: var(--paper); font-size: .8rem; }
+
+.projects-panel { display: grid; gap: 2rem; }
+.projects-panel > section + section { padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.project-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
+.project-section-heading p { margin: 0; color: var(--amber); font-size: .68rem; letter-spacing: .08em; }
+.project-section-heading h3 { margin: .2rem 0 0; color: var(--paper); font-size: 1.15rem; letter-spacing: .04em; }
+.project-section-heading > span { color: var(--phosphor-dim); font-size: .68rem; letter-spacing: .08em; white-space: nowrap; }
+.project-intro { max-width: 720px; margin: .55rem 0 1rem; color: #c7c1aa; }
+.featured-project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.featured-project { display: grid; grid-template-rows: auto auto 1fr auto auto; gap: .55rem; min-height: 270px; padding: 1rem; border: 1px solid var(--line); color: var(--phosphor); text-decoration: none; background: rgba(157, 246, 139, .035); }
+.featured-project:hover, .featured-project:focus-visible { border-color: var(--amber); outline: none; background: rgba(240, 193, 110, .1); }
+.featured-project time { color: var(--amber); font-size: .66rem; letter-spacing: .08em; }
+.featured-project h4 { margin: 0; color: var(--paper); font-size: 1rem; }
+.featured-project p { margin: 0; color: #d8d2b9; font-size: .84rem; line-height: 1.55; }
+.featured-project span { color: var(--phosphor-dim); font-size: .66rem; letter-spacing: .07em; }
+.featured-project b { padding-top: .55rem; border-top: 1px solid var(--line); font-size: .72rem; }
+.build-history { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.build-history li { display: grid; grid-template-columns: 8rem minmax(0, 1fr); border-left: 2px solid var(--phosphor-dim); }
+.build-history time { padding: 1rem; color: var(--amber); font-size: .68rem; letter-spacing: .06em; }
+.build-history a { display: grid; gap: .2rem; padding: .85rem 1rem; border-bottom: 1px solid var(--line); color: var(--phosphor); text-decoration: none; }
+.build-history a:hover, .build-history a:focus-visible { outline: none; background: rgba(240, 193, 110, .1); }
+.build-history a span { color: #d8d2b9; font-size: .8rem; }
 
 .timeline { display: grid; gap: 1.2rem; }
 .timeline article { padding-left: 1rem; border-left: 2px solid var(--phosphor-dim); }
@@ -173,7 +194,11 @@ button { color: inherit; }
   .cave { padding: 1rem; }
   .directory { grid-template-columns: 1fr; }
   .directory > p, .directory-socials { grid-column: auto; }
-  .directory-grid, .project-list, .story-grid { grid-template-columns: 1fr; }
+  .directory-grid, .featured-project-grid, .story-grid { grid-template-columns: 1fr; }
+  .featured-project { min-height: 0; }
+  .project-section-heading { align-items: start; }
+  .build-history li { grid-template-columns: 1fr; }
+  .build-history time { padding: .85rem 1rem .1rem; }
   .career-facts, .career-columns { grid-template-columns: 1fr; }
   .career-browser { grid-template-columns: 1fr; }
   .career-tree { border-right: 0; border-bottom: 1px solid var(--line); }
