@@ -17,7 +17,7 @@ const base = import.meta.env.BASE_URL
 const destinations: { id: Panel; label: string; hint: string; className: string }[] = [
   { id: 'resume', label: 'RESUME.EXE', hint: 'Native career dossier', className: 'resume' },
   { id: 'work', label: 'WORK.LOG', hint: 'Habuild · Freecharge · BYJU\'S', className: 'work' },
-  { id: 'projects', label: 'PERSONAL.ARTIFACTS', hint: 'Useful tools, old experiments, honest context', className: 'projects' },
+  { id: 'projects', label: 'PERSONAL.ARTIFACTS', hint: 'Featured builds and the road here', className: 'projects' },
   { id: 'learning', label: 'LEARNING/', hint: 'DSA, Java, systems and rabbit holes', className: 'learning' },
   { id: 'nerd', label: 'NERD.STUFF', hint: 'Tiling windows since before it was cool', className: 'nerd' },
   { id: 'voice', label: 'VOICE.WORKFLOWS', hint: 'Speech-to-text, text-to-speech and terminal agents', className: 'voice' },
@@ -25,10 +25,45 @@ const destinations: { id: Panel; label: string; hint: string; className: string 
   { id: 'stories', label: 'PRODUCTION.STORIES', hint: 'Things broke. The evidence told the story.', className: 'stories' },
 ]
 
-const projects = [
-  ['ARTIX DOTFILES', 'BSPWM, XMonad, Polybar, Neovim and years of refusing to place windows by hand.', 'https://github.com/NimeshJohari02/artix-dotfiles'],
-  ['NOTESCLI', 'A focused command-line notes app, built because three clicks felt excessive.', 'https://github.com/NimeshJohari02/NotesCLI'],
-]
+const featuredProjects = [
+  {
+    name: 'E2E AGENTIC CHAT',
+    period: '2026 · CODING-AGENT EXPERIMENT',
+    description: 'A human-directed coding-agent experiment that built a local NestJS support-chat POC with FAQ routing, pgvector search, model-provider switching, Docker and human-agent paths.',
+    context: 'LOCAL POC · NOT DEPLOYED',
+    url: 'https://github.com/NimeshJohari02/E2E-Chat-Agentic',
+  },
+  {
+    name: 'DAWAI APP',
+    period: '2026 · AI PRODUCT POC',
+    description: 'An AI-assisted medicine-reminder experiment with prescription parsing, schedule generation, family profiles and browser notifications.',
+    context: 'LOCAL POC · NOT DEPLOYED',
+    url: 'https://github.com/NimeshJohari02/dawai-app',
+  },
+  {
+    name: 'LOG INGESTOR PIPELINE',
+    period: '2023 · SYSTEMS PIPELINE',
+    description: 'A Go service that accepts logs, writes them locally and routes them through Logstash into Elasticsearch and Kibana to explore ingestion and observability.',
+    context: 'GO · ELK · LOCAL SYSTEMS BUILD',
+    url: 'https://github.com/NimeshJohari02/log-ingestor-pipeline',
+  },
+  {
+    name: 'YOUTUBE API TASK',
+    period: '2022 · API + SEARCH',
+    description: 'A scheduled YouTube ingestion service with API polling, Elasticsearch-backed search, pagination, Docker and Kibana.',
+    context: 'NODE.JS · ELASTICSEARCH · COLLEGE PROJECT',
+    url: 'https://github.com/NimeshJohari02/Youtube-Api-Task',
+  },
+] as const
+
+const buildHistory = [
+  { period: 'MAR 2020', name: 'HTMLTRY', description: 'The first webpage: raw HTML and CSS, before frameworks became the default.', url: 'https://github.com/NimeshJohari02/HTMLtry' },
+  { period: 'JUL 2020', name: 'BOXMAKER', description: 'An early React state-and-forms exercise that creates configurable boxes.', url: 'https://github.com/NimeshJohari02/BoxMaker' },
+  { period: 'JUL 2020', name: 'LIGHTS OUT REACT', description: 'A course-era React implementation of the Lights Out puzzle.', url: 'https://github.com/NimeshJohari02/LightsOutReact' },
+  { period: 'OCT 2021', name: 'GOLANG REST API', description: 'A native Go API exploring JWT authentication, MongoDB, GridFS uploads and user/post routes.', url: 'https://github.com/NimeshJohari02/Golang-RestAPI' },
+  { period: 'JAN 2024', name: 'GRPC GOLANG ARCHITECTURE', description: 'A small Go and Protocol Buffers client/server for ticket purchases, receipts and seat allocation.', url: 'https://github.com/NimeshJohari02/grpc-golang-architecture' },
+  { period: 'OCT 2025', name: 'RATE LIMITER', description: 'Spring Boot implementations of fixed-window, leaky-bucket and token-bucket rate limiting for comparing their trade-offs.', url: 'https://github.com/NimeshJohari02/rate-limiter' },
+] as const
 
 const stories: Story[] = [
   ['01 · OBSERVABILITY', 'The disk that ate the traces', 'Co-led recovery and retention work for self-hosted Langfuse/ClickHouse. Trace storage fell from 175 GiB to 12 GiB without turning observability off.'],
@@ -151,7 +186,7 @@ const panelTitles: Record<Panel, string> = {
   resume: 'RESUME.EXE · CAREER.LOG',
   work: 'WORK.LOG',
   stories: 'PRODUCTION.STORIES',
-  projects: 'PERSONAL.ARTIFACTS',
+  projects: 'PERSONAL.ARTIFACTS · PROJECT HISTORY',
   learning: 'LEARNING/',
   nerd: 'NERD.STUFF',
   voice: 'VOICE.WORKFLOWS',
@@ -177,14 +212,7 @@ const panelContent: Record<Panel, React.ReactNode> = {
     </div>
   ),
   stories: <StoriesPanel />,
-  projects: (
-    <div className="project-list">
-      {projects.map(([name, description, url]) => (
-        <a href={url} target="_blank" rel="noreferrer" key={name}><b>{name} ↗</b><span>{description}</span></a>
-      ))}
-      <p className="muted">These are personal artifacts, not inflated case studies. Larger public projects join them only after they build, run and survive an honest review.</p>
-    </div>
-  ),
+  projects: <ProjectsPanel />,
   learning: (
     <div>
       <p className="lede">College placements are anxious. Code became the coping mechanism.</p>
@@ -225,6 +253,56 @@ const panelContent: Record<Panel, React.ReactNode> = {
     </div>
   ),
   lab: <GlitchLab />,
+}
+
+function ProjectsPanel() {
+  return (
+    <div className="projects-panel">
+      <section aria-labelledby="featured-builds-title">
+        <div className="project-section-heading">
+          <div>
+            <p>~/projects/featured</p>
+            <h3 id="featured-builds-title">FEATURED.BUILDS</h3>
+          </div>
+          <span>04 SELECTED</span>
+        </div>
+        <p className="project-intro">Systems, APIs and agent experiments—shown for what they were built to explore.</p>
+        <div className="featured-project-grid">
+          {featuredProjects.map(({ name, period, description, context, url }) => (
+            <a className="featured-project" href={url} target="_blank" rel="noreferrer" key={name}>
+              <time>{period}</time>
+              <h4>{name}</h4>
+              <p>{description}</p>
+              <span>{context}</span>
+              <b>VIEW REPOSITORY ↗</b>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="build-history-title">
+        <div className="project-section-heading">
+          <div>
+            <p>~/projects/history</p>
+            <h3 id="build-history-title">BUILD.HISTORY</h3>
+          </div>
+          <span>START → NOW</span>
+        </div>
+        <p className="project-intro">The trail from a first webpage through React exercises, backend systems and later architecture experiments.</p>
+        <ol className="build-history">
+          {buildHistory.map(({ period, name, description, url }) => (
+            <li key={name}>
+              <time>{period}</time>
+              <a href={url} target="_blank" rel="noreferrer">
+                <b>{name} ↗</b>
+                <span>{description}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    </div>
+  )
 }
 
 function StoriesPanel() {
