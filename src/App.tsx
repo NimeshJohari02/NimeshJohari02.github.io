@@ -60,9 +60,9 @@ const buildHistory = [
   { period: 'MAR 2020', name: 'HTMLTRY', description: 'The first webpage: raw HTML and CSS, before frameworks became the default.', url: 'https://github.com/NimeshJohari02/HTMLtry' },
   { period: 'JUL 2020', name: 'BOXMAKER', description: 'An early React state-and-forms exercise that creates configurable boxes.', url: 'https://github.com/NimeshJohari02/BoxMaker' },
   { period: 'JUL 2020', name: 'LIGHTS OUT REACT', description: 'A course-era React implementation of the Lights Out puzzle.', url: 'https://github.com/NimeshJohari02/LightsOutReact' },
-  { period: '2020 — 2021', name: 'MYPORTFOLIO', description: 'The hand-built pre-AI portfolio and the direct predecessor to this site.', url: 'https://github.com/NimeshJohari02/myportfolio' },
   { period: 'OCT 2021', name: 'GOLANG REST API', description: 'A native Go API exploring JWT authentication, MongoDB, GridFS uploads and user/post routes.', url: 'https://github.com/NimeshJohari02/Golang-RestAPI' },
   { period: 'JAN 2024', name: 'GRPC GOLANG ARCHITECTURE', description: 'A small Go and Protocol Buffers client/server for ticket purchases, receipts and seat allocation.', url: 'https://github.com/NimeshJohari02/grpc-golang-architecture' },
+  { period: 'OCT 2025', name: 'RATE LIMITER', description: 'Spring Boot implementations of fixed-window, leaky-bucket and token-bucket rate limiting for comparing their trade-offs.', url: 'https://github.com/NimeshJohari02/rate-limiter' },
 ] as const
 
 const stories: Story[] = [
@@ -288,7 +288,7 @@ function ProjectsPanel() {
           </div>
           <span>START → NOW</span>
         </div>
-        <p className="project-intro">The trail from a first webpage through React exercises, a handwritten portfolio and backend-system experiments.</p>
+        <p className="project-intro">The trail from a first webpage through React exercises, backend systems and later architecture experiments.</p>
         <ol className="build-history">
           {buildHistory.map(({ period, name, description, url }) => (
             <li key={name}>
