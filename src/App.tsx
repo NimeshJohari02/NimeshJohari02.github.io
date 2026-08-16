@@ -20,9 +20,9 @@ const destinations: { id: Panel; label: string; hint: string; className: string 
   { id: 'projects', label: 'PERSONAL.ARTIFACTS', hint: 'Useful tools, old experiments, honest context', className: 'projects' },
   { id: 'learning', label: 'LEARNING/', hint: 'DSA, Java, systems and rabbit holes', className: 'learning' },
   { id: 'nerd', label: 'NERD.STUFF', hint: 'Tiling windows since before it was cool', className: 'nerd' },
-  { id: 'voice', label: 'VOICE.WORKFLOWS', hint: 'I talk to computers. A lot.', className: 'voice' },
+  { id: 'voice', label: 'VOICE.WORKFLOWS', hint: 'Speech-to-text, text-to-speech and terminal agents', className: 'voice' },
   { id: 'legacy', label: 'LEGACY.HTML', hint: 'The handmade pre-AI website', className: 'legacy' },
-  { id: 'stories', label: 'PRODUCTION.STORIES', hint: 'Things broke. I followed the evidence.', className: 'stories' },
+  { id: 'stories', label: 'PRODUCTION.STORIES', hint: 'Things broke. The evidence told the story.', className: 'stories' },
 ]
 
 const projects = [
@@ -72,6 +72,7 @@ function App() {
           <a href="#resume">RESUME</a>
           <a href="#stories">PRODUCTION STORIES</a>
           <a href="#projects">PROJECTS</a>
+          <a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
           <a href={links.email}>CONTACT</a>
         </nav>
       </header>
@@ -80,10 +81,11 @@ function App() {
         <p className="eyebrow">THE NERD CAVE</p>
         <h1 id="page-title">Nimesh Johari</h1>
         <p className="role">AI Pod Tech Lead · Production Agent Systems · Distributed Backends</p>
-        <p className="proof">I lead a three-developer AI Pod across architecture, delivery, reliability, evaluation, observability and cost.</p>
+        <p className="proof">Leading a three-developer AI Pod across architecture, delivery, reliability, evaluation, observability and cost.</p>
         <div className="intro-links">
           <a className="primary" href="#resume">OPEN RESUME</a>
           <a href="#stories">READ PRODUCTION STORIES</a>
+          <a href={links.github} target="_blank" rel="noreferrer">VIEW GITHUB ↗</a>
         </div>
       </section>
 
@@ -185,20 +187,20 @@ const panelContent: Record<Panel, React.ReactNode> = {
   ),
   learning: (
     <div>
-      <p className="lede">College placements are anxious. My coping mechanism was code.</p>
-      <p>I kept DSA implementations, C/C++ exercises and early web experiments so the learning trail stays honest. Current rabbit holes include Java internals, distributed systems, agent evaluation and whatever broke in production this week.</p>
-      <p>I learn by running the thing, breaking the thing, reading why it broke, and leaving notes for future me.</p>
+      <p className="lede">College placements are anxious. Code became the coping mechanism.</p>
+      <p>The archive keeps DSA implementations, C/C++ exercises and early web experiments so the learning trail stays honest. Current rabbit holes include Java internals, distributed systems, agent evaluation and whatever broke in production this week.</p>
+      <p>The learning loop: run the thing, break the thing, understand why it broke and leave useful notes.</p>
       <div className="panel-links"><a className="primary" href={links.leetcodeGrind} target="_blank" rel="noreferrer">OPEN LEETCODE GRIND ↗</a></div>
     </div>
   ),
   nerd: (
     <div>
-      <p className="lede">I automate tiny annoyances with unreasonable enthusiasm.</p>
+      <p className="lede">Tiny annoyances attract unreasonable automation.</p>
       <ul className="plain-list">
         <li>Years of Linux tiling window managers made keyboard navigation the default. macOS now tiles itself too; manually arranging windows feels like packet loss.</li>
-        <li>I built this portfolio's ancestor by hand and kept it alive as evidence.</li>
+        <li>This portfolio's hand-built ancestor stays alive as evidence.</li>
         <li>I use AI heavily, review its code, test its claims and argue with its prompts.</li>
-        <li>New model, weird CLI, better shortcut? I will probably try it before lunch.</li>
+        <li>New model, weird CLI, better shortcut? Probably tested before lunch.</li>
       </ul>
       <div className="panel-links"><a href="#lab">OPEN GLITCH//LAB →</a></div>
     </div>
@@ -206,14 +208,14 @@ const panelContent: Record<Panel, React.ReactNode> = {
   voice: (
     <div>
       <p className="lede">A keyboard is occasionally the slow fallback path.</p>
-      <p>Flow currently clocks me at <strong>154 WPM</strong>—top <strong>0.1%</strong>—with <strong>126,503 words</strong> dictated across <strong>45 apps</strong>. I use speech-to-text for context dumps, prompts and rough specs.</p>
-      <p>Text-to-speech handles long rereads; then I inspect the diff, run the tests and keep the judgment manual.</p>
+      <p>Flow currently records <strong>154 WPM</strong>—top <strong>0.1%</strong>—with <strong>126,503 words</strong> dictated across <strong>45 apps</strong>. Speech-to-text handles context dumps, prompts and rough specs.</p>
+      <p>Text-to-speech handles long rereads; the diff still gets inspected, tests still run and judgment stays manual.</p>
     </div>
   ),
   legacy: (
     <div>
       <p className="lede">Before AI completed everyone's sentences, I completed my own divs.</p>
-      <p>This is the portfolio I wrote by hand: old values, old CSS, honest origin story. It stays exactly where it is.</p>
+      <p>The 2021 portfolio was written by hand: old values, old CSS, honest origin story. It stays exactly where it is.</p>
       <div className="panel-links">
         <a className="primary" href="https://nimeshjohari02.github.io/myportfolio/" target="_blank" rel="noreferrer">OPEN THE 2021 SITE ↗</a>
         <a href="https://github.com/NimeshJohari02/myportfolio" target="_blank" rel="noreferrer">VIEW SOURCE ↗</a>
@@ -252,7 +254,7 @@ function ResumePanel() {
       <section className="career-scan" aria-labelledby="career-scan-title">
         <p className="career-path">~/quick-scan</p>
         <h3 id="career-scan-title">AI Pod Tech Lead · Backend engineer · Friendly Neighborhood AI Prompt Tuner</h3>
-        <p>I build production agent systems, distributed backends and the boring reliability machinery that keeps both useful.</p>
+        <p>Production agent systems, distributed backends and the boring reliability machinery that keeps both useful.</p>
         <ul className="career-facts">
           <li><b>NOW</b><span>Leading a three-developer AI Pod at Habuild</span></li>
           <li><b>FOCUS</b><span>Agent systems, distributed backends, reliability</span></li>
@@ -306,7 +308,7 @@ function ResumePanel() {
           </details>
 
           <details>
-            <summary><span>systems.cfg</span><small>WHAT I BUILD WITH</small></summary>
+            <summary><span>systems.cfg</span><small>SYSTEMS IN USE</small></summary>
             <div className="career-entry career-columns">
               <p><b>AGENTS</b><span>LangGraph, prompts, routing, tools, memory, evaluation, observability</span></p>
               <p><b>BACKENDS</b><span>Java, Python, TypeScript, SQS, Redis, MongoDB, PostgreSQL, Elasticsearch</span></p>
@@ -327,7 +329,7 @@ function ResumePanel() {
       </div>
 
       <div className="panel-links">
-        <a className="primary" href={links.email}>EMAIL ME</a>
+        <a className="primary" href={links.email}>EMAIL</a>
         <a href={links.linkedin} target="_blank" rel="noreferrer">LINKEDIN ↗</a>
         <a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
       </div>
