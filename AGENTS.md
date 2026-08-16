@@ -28,6 +28,7 @@ This repository is the public source for Nimesh Johari's portfolio and resume ar
 ## Change discipline
 
 - Keep the retro Nerd Cave accessible without requiring hover, function keys, or pixel-perfect pointer use.
+- Preserve the Billu Bhai / Galaxy memorial in the Nerd Cave artwork: Billu resting on the green chair, the rug text `GALAXY / ALWAYS / HOME / <3`, and the small line `billu bhai -- here, like always <3`. The small line must remain visible in the initial viewport on desktop and mobile. Never remove, rename, hide, crop out, overwrite, or replace these elements unless Nimesh explicitly requests that exact memorial change. Any future room-art regeneration must preserve all three and verify their desktop and mobile visibility.
 - Browser-test every spatial hotspot with a real pointer click as well as keyboard activation; semantic links and direct hashes do not prove that overlapping hitboxes work.
 - Prefer native browser features, current dependencies, and the smallest correct change.
 - Run `npm run check` before committing.

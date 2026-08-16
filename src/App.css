@@ -36,7 +36,9 @@ button { color: inherit; }
 .system-bar nav a:hover, .system-bar nav a:focus-visible { border-color: var(--phosphor); outline: none; }
 
 .intro { max-width: 1180px; margin: 0 auto; padding: calc(56px + clamp(2.5rem, 5vw, 4rem)) 1.25rem clamp(1.75rem, 3vw, 2.5rem); }
-.eyebrow { margin: 0 0 .85rem; color: var(--amber); font-size: .72rem; letter-spacing: .14em; }
+.intro-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .35rem 1rem; margin-bottom: .85rem; }
+.eyebrow { margin: 0; color: var(--amber); font-size: .72rem; letter-spacing: .14em; }
+.billu-note { margin: 0; color: var(--phosphor-dim); font-size: .58rem; letter-spacing: .09em; white-space: nowrap; }
 .intro h1 { margin: 0; color: var(--paper); font-size: clamp(3rem, 8vw, 7rem); line-height: .9; letter-spacing: -.06em; }
 .role { max-width: 920px; margin: 1.25rem 0 .55rem; color: var(--phosphor); font-size: clamp(1rem, 2vw, 1.45rem); line-height: 1.35; }
 .proof { max-width: 760px; margin: 0; color: #c7c1aa; line-height: 1.55; }

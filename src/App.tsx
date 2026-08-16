@@ -113,7 +113,10 @@ function App() {
       </header>
 
       <section className="intro" aria-labelledby="page-title">
-        <p className="eyebrow">THE NERD CAVE</p>
+        <div className="intro-meta">
+          <p className="eyebrow">THE NERD CAVE</p>
+          <p className="billu-note">billu bhai -- here, like always &lt;3</p>
+        </div>
         <h1 id="page-title">Nimesh Johari</h1>
         <p className="role">AI Pod Tech Lead · Production Agent Systems · Distributed Backends</p>
         <p className="proof">Leading a three-developer AI Pod across architecture, delivery, reliability, evaluation, observability and cost.</p>
@@ -125,10 +128,10 @@ function App() {
       </section>
 
       <section className="cave" aria-label="Interactive Nerd Cave">
-        <img className="directory-background" src={`${base}concepts/nerd-cave.webp`} alt="" />
+        <img className="directory-background" src={`${base}concepts/nerd-cave-billu.webp`} alt="" />
         <div className="scene-frame">
           <div className="scene-layer">
-            <img src={`${base}concepts/nerd-cave.webp`} alt="Pixel-art developer room with eight interactive objects" />
+            <img src={`${base}concepts/nerd-cave-billu.webp`} alt="Pixel-art developer room with eight interactive objects and Billu Bhai resting on a green chair" />
             <div className="cave-shade" />
 
             <nav className="desktop-hotspots" aria-label="Objects in the Nerd Cave">
@@ -138,7 +141,6 @@ function App() {
             </nav>
           </div>
         </div>
-
         <nav className="directory" id="map" aria-label="Nerd Cave directory">
           <p>ROOM DIRECTORY</p>
           {destinations.map(({ id, label, hint }) => (
