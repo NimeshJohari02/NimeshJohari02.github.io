@@ -113,7 +113,10 @@ function App() {
       </header>
 
       <section className="intro" aria-labelledby="page-title">
-        <p className="eyebrow">THE NERD CAVE</p>
+        <div className="intro-meta">
+          <p className="eyebrow">THE NERD CAVE</p>
+          <p className="billu-note">billu bhai -- here, like always &lt;3</p>
+        </div>
         <h1 id="page-title">Nimesh Johari</h1>
         <p className="role">AI Pod Tech Lead · Production Agent Systems · Distributed Backends</p>
         <p className="proof">Leading a three-developer AI Pod across architecture, delivery, reliability, evaluation, observability and cost.</p>
@@ -138,8 +141,6 @@ function App() {
             </nav>
           </div>
         </div>
-        <p className="billu-note">billu bhai -- here, like always &lt;3</p>
-
         <nav className="directory" id="map" aria-label="Nerd Cave directory">
           <p>ROOM DIRECTORY</p>
           {destinations.map(({ id, label, hint }) => (
