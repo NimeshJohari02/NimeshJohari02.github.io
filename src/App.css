@@ -62,6 +62,7 @@ button { color: inherit; }
 .hotspot--voice { left: 65.6%; top: 62.3%; width: 11.5%; height: 7%; }
 .hotspot--legacy { left: 17.7%; top: 70.8%; width: 12.5%; height: 7%; }
 .hotspot--stories { left: 72.5%; top: 74.4%; width: 13.5%; height: 7%; }
+.billu-note { position: absolute; z-index: 5; right: 1rem; bottom: 2.4rem; margin: 0; color: var(--phosphor-dim); font-size: .58rem; letter-spacing: .09em; pointer-events: none; }
 .directory { display: none; }
 
 .crt-surface {
@@ -182,6 +183,7 @@ button { color: inherit; }
   .directory > a span { color: var(--paper); font-size: .72rem; }
   .directory-socials { display: flex; flex-wrap: wrap; gap: .5rem; padding-top: .5rem; }
   .directory-socials a { padding: .7rem; border: 1px solid var(--phosphor-dim); color: var(--phosphor); text-decoration: none; background: #050504; }
+  .billu-note { position: relative; right: auto; bottom: auto; max-width: 900px; margin: .75rem auto 0; text-align: right; }
 }
 
 @media (max-width: 760px) {

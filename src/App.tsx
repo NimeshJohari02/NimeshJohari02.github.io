@@ -125,10 +125,10 @@ function App() {
       </section>
 
       <section className="cave" aria-label="Interactive Nerd Cave">
-        <img className="directory-background" src={`${base}concepts/nerd-cave.webp`} alt="" />
+        <img className="directory-background" src={`${base}concepts/nerd-cave-billu.webp`} alt="" />
         <div className="scene-frame">
           <div className="scene-layer">
-            <img src={`${base}concepts/nerd-cave.webp`} alt="Pixel-art developer room with eight interactive objects" />
+            <img src={`${base}concepts/nerd-cave-billu.webp`} alt="Pixel-art developer room with eight interactive objects and Billu Bhai resting on a green chair" />
             <div className="cave-shade" />
 
             <nav className="desktop-hotspots" aria-label="Objects in the Nerd Cave">
@@ -138,6 +138,7 @@ function App() {
             </nav>
           </div>
         </div>
+        <p className="billu-note">billu bhai -- here, like always &lt;3</p>
 
         <nav className="directory" id="map" aria-label="Nerd Cave directory">
           <p>ROOM DIRECTORY</p>
