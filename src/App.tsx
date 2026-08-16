@@ -33,13 +33,13 @@ const projects = [
 const stories: Story[] = [
   ['01 · OBSERVABILITY', 'The disk that ate the traces', 'Co-led recovery and retention work for self-hosted Langfuse/ClickHouse. Trace storage fell from 175 GiB to 12 GiB without turning observability off.'],
   ['02 · RELEASES', 'Four hundred files apart', 'Led cleanup of a roughly 400-file staging/main divergence and restored a controlled promotion path.'],
-  ['03 · CORRECTNESS', 'An AI answer is not proof', 'Hardened agent flows around validation, tool identity, ambiguous outcomes and authoritative readback before claiming that an action succeeded.'],
-  ['04 · RETRIEVAL', 'Memory needs boring machinery', 'Worked across durable workers, lifecycle controls and hybrid retrieval—not just prompts—to make memory and knowledge dependable.'],
+  ['03 · CORRECTNESS', 'Shadow first, enforce second', 'Led receipt-backed guardrails that match action claims to same-turn tool outcomes. A 63K-turn audit found 31 unsupported claims before bounded retry and escalation enforcement.'],
+  ['04 · RETRIEVAL', 'Memory needs boring machinery', 'Designed asynchronous memory that distills chats into durable facts and episodes, retrieves the relevant pieces into agent context and keeps follow-up work off the chat hot path.'],
   ['05 · CRM', 'Replies must arrive in order', 'Shipped queue-backed multi-response delivery with bounded retries and duplicate-call protection for a high-throughput messaging system.'],
   ['06 · DEBUGGING', 'Follow the whole failure', 'Trace input, routing, tools, state, downstream effects and delivery. Preserve “unknown” when telemetry ends instead of inventing an RCA.'],
-  ['07 · MODELS', 'Changing the engine mid-flight', 'Rolled GPT-5.6 Luna through the production agent runtime with capability checks, fallback boundaries and model identity in observability.'],
+  ['07 · MODELS', 'Changing the engine mid-flight', 'Led model changes across 14 runtime slots with capability checks, fail-fast validation, fallback boundaries and model, provider and prompt identity in observability.'],
   ['08 · PERFORMANCE', 'One grouped read beats a query fan-out', 'Collapsed repeated eligibility lookups into a grouped query on a high-read path, then used planner and runtime evidence to validate the result.'],
-  ['09 · MIGRATION', 'Deletion comes last', 'Designed migration gates around one serving authority, effect-free shadowing, idempotency, canaries, rollback and proof before retirement.'],
+  ['09 · CUSTOMER INSIGHT', 'Ten thousand signals need evidence', 'Led production hardening of hourly customer-insight digests with code-computed metrics, quote-verified evidence, real-time spike detection and six-tool natural-language analysis.'],
   ['10 · ENGINEERING SYSTEMS', 'Review the code that will actually run', 'Introduced AI-assisted exact-head review gates inside the Pod and led cleanup of release drift before adding more features.'],
 ]
 
@@ -169,7 +169,7 @@ const panelContent: Record<Panel, React.ReactNode> = {
   resume: <ResumePanel />,
   work: (
     <div className="timeline">
-      <article><time>2026 — NOW</time><h2>Habuild · AI Pod Tech Lead</h2><p>Lead a three-developer Pod across agent architecture, delivery, PR quality, model evaluation, observability, cost and production reliability.</p><p>Started in the CRM engineering Pod, working on ordered messaging, retries, duplicate prevention, caching, search and recovery before moving into AI.</p></article>
+      <article><time>2026 — NOW</time><h2>Habuild · AI Pod Tech Lead</h2><p>Lead a three-developer Pod across architecture, delivery, PR quality, reliability and cost for a legacy-to-LangGraph AI platform spanning 30+ tools and 48K+ daily user queries.</p><p>Productionized customer-insight, conversational-memory and receipt-backed correctness systems after starting in CRM engineering on ordered messaging, retries, caching, search and recovery.</p></article>
       <article><time>2024 — 2026</time><h2>Freecharge · Senior Software Engineer, Backend</h2><p>Led 3–4 backend engineers on credit-card acquisition. Built event-driven journeys with SQS, Redis and Elasticsearch; shipped reliability, experimentation and recovery work.</p></article>
       <article><time>2022 — 2024</time><h2>BYJU'S · Member of Technical Staff 1</h2><p>Built Java/Spring Boot catalog, payment and order services, then onboarding and chatbot workflows that made common support problems self-serve.</p></article>
     </div>
@@ -277,8 +277,8 @@ function ResumePanel() {
           <details open>
             <summary><span>now-habuild-ai.log</span><small>AI POD TECH LEAD · 2026—NOW</small></summary>
             <div className="career-entry">
-              <p>Lead three developers across agent architecture, delivery, review quality, model evaluation, observability, cost and production reliability.</p>
-              <p>Productionized a LangGraph multi-agent platform across prompts, routing, tools, memory, evaluation and observability.</p>
+              <p>Lead three developers across architecture, delivery, review quality, reliability and cost for Habuild's legacy-to-LangGraph AI platform spanning 30+ tools and 48K+ daily user queries.</p>
+              <p>Led an AI customer-insight pipeline analyzing 10K+ daily signals; productionized conversational memory, hybrid retrieval and receipt-backed mutation guardrails.</p>
             </div>
           </details>
 
@@ -319,7 +319,7 @@ function ResumePanel() {
             <ul className="career-entry plain-list">
               <li>Co-led Langfuse and ClickHouse reliability work that reduced storage from 175 GiB to 12 GiB.</li>
               <li>Led cleanup of an approximately 400-file staging/main divergence and restored a controlled release path.</li>
-              <li>Rolled GPT-5.6 Luna into the production agent runtime with capability and observability guardrails.</li>
+              <li>Led model changes across 14 runtime slots with capability, rollout and observability guardrails.</li>
               <li>Trained 200+ colleagues on Claude Code and AI-assisted workflows.</li>
             </ul>
           </details>

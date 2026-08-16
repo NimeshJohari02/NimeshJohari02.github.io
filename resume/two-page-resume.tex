@@ -76,25 +76,25 @@
 \section{~~Experience}
 \resumeSubHeadingListStart
   \resumeSubheading
-    {AI Pod Tech Lead}{}
-    {\textbf{Habuild -- AI Platform}}{\faCalendar\ Apr '26 -- Present}
+    {Software Development Engineer 2 \textbar{} AI Pod Tech Lead}{}
+    {\textbf{Habuild -- AI Pod}}{\faCalendar\ Apr '26 -- Present}
     {\small\textbf{Tech:} Python, LangGraph, Langfuse, ClickHouse, OpenAI/Gemini, Qdrant, Redis, Postgres\par}
     \begin{itemize}
-      \item{Lead a \textbf{3-engineer AI team}, owning architecture, delivery, pull-request quality, production reliability, incidents, and cost for a LangGraph platform with \textbf{10+ agents} and \textbf{23 tools} serving \textbf{320K+ user queries/day}}
+      \item{Lead a \textbf{3-engineer AI team}, owning architecture, delivery, pull-request quality, production reliability, incidents, and cost for Habuild's legacy-to-LangGraph AI platform spanning \textbf{30+ tools} and \textbf{48K+ user queries/day}}
       \vspace{-2pt}
-      \item{Rolled out the \textbf{GPT-5.6 Luna large language model} across the production AI platform, making model and prompt versions traceable in observability}
+      \item{Led production hardening of an AI customer-insight pipeline analyzing \textbf{10K+ daily user signals}, generating hourly map-reduce digests with code-computed metrics and verbatim-verified evidence, detecting real-time issue spikes, and enabling natural-language analysis through a six-tool agent}
       \vspace{-2pt}
-      \item{Co-led recovery and storage optimization of a \textbf{self-hosted AI observability stack (Langfuse/ClickHouse)}, reducing trace storage from \textbf{175 GiB to 12 GiB} (\textbf{93\%})}
+      \item{Led production model changes across \textbf{14 runtime slots}, centralizing assignments, validating tool-calling and structured-output capabilities, enforcing API/worker fail-fast checks, and attaching model/provider/prompt identity for traceable rollout and rollback}
       \vspace{-2pt}
-      \item{Diagnosed a production PostgreSQL deployment deadlock using \textbf{224 log events} and validated composite indexes for partitioned chat-history queries, eliminating filtered rows in tested plans (\textbf{156/117 to 0})}
+      \item{Led shadow-first rollout of receipt-backed mutation guardrails that match completion and handoff claims to same-turn tool outcomes; a \textbf{63K-turn audit} found \textbf{31 unsupported claims}, and live enforcement uses one bounded retry before programmatic escalation}
       \vspace{-2pt}
-      \item{Built and deployed asynchronous memory and knowledge pipelines using \textbf{SQS/EventBridge}, AWS MemoryDB, and hybrid semantic/keyword retrieval in Qdrant; seeded all \textbf{406 knowledge records} and validated \textbf{2,779 passing tests}}
+      \item{Co-led recovery and right-sizing of self-hosted \textbf{Langfuse/ClickHouse}, cutting trace storage from \textbf{175 GiB to 12 GiB} (\textbf{93\%}) and matched legacy logs from \textbf{84,674 to 417} while retaining 100\% chat tracing, deterministic worker sampling, and query-level debugging}
       \vspace{-2pt}
-      \item{Reduced legacy AI-backend logs from \textbf{84,674 to 417} in controlled pre/post-deployment validation, targeting \textbf{\textasciitilde\$14/day} savings; replaced a \textbf{6$\times$N query pattern with one grouped query} on a path associated with \textbf{\textasciitilde40M reads}}
+      \item{Productionized \textbf{Qdrant hybrid retrieval} using dense question/answer vectors, sparse BM25, HNSW $m$/\textit{ef} tuning, binary quantization, and three-way reciprocal-rank fusion; fixed filter blackouts that hid relevant knowledge}
       \vspace{-2pt}
-      \item{Led cleanup of an approximately \textbf{400-file divergence between release branches} and introduced commit-pinned AI-assisted pull-request review gates within the team; trained \textbf{200+ colleagues} on AI-assisted engineering workflows}
+      \item{Designed and productionized an asynchronous conversational-memory pipeline that turns chats into durable profile facts and ongoing episodes, semantically injects relevant memories into agent context, and manages follow-up lifecycles through idempotent SQS/EventBridge workers}
       \vspace{-2pt}
-      \item{Designed a staged migration from a legacy AI assistant to a new agent platform across CRM and business services, using safe shadow validation, idempotent processing, canary rollout, and rollback controls}
+      \item{Collapsed a production \textbf{6$\times$N event-eligibility query fan-out} into one PostgreSQL grouped aggregate, addressing approximately \textbf{40M tiny reads} on the chat-answer path}
     \end{itemize}
 
   \resumeSubheading
@@ -102,9 +102,9 @@
     {\textbf{Habuild -- CRM Platform}}{\faCalendar\ Feb '26 -- Mar '26}
     {\small\textbf{Tech:} TypeScript, NestJS, AWS Keyspaces, Elasticsearch, Redis, Kafka, RabbitMQ, AWS SQS/SNS\par}
     \begin{itemize}
-      \item{Built a high-volume WhatsApp CRM backend using \textbf{AWS Keyspaces} for durable history, \textbf{Elasticsearch} for live state/search, Redis for control state, and Kafka/SQS/RabbitMQ for asynchronous processing}
+      \item{Delivered reliability and data paths for a high-volume WhatsApp CRM using \textbf{AWS Keyspaces} for durable history, Elasticsearch for live state/search, Redis for control state, and asynchronous messaging}
       \vspace{-2pt}
-      \item{Stabilized \textbf{3 high-value NestJS routes} with \textbf{75 tests}, replacing legacy endpoints failing \textbf{96--100\%} of requests; identified an Elasticsearch mapping regression within \textbf{35 minutes} of deployment}
+      \item{Stabilized \textbf{3 high-value routes} by replacing legacy endpoints reported at \textbf{96--100\% failure}; identified an Elasticsearch mapping regression within \textbf{35 minutes} of deployment}
       \vspace{-2pt}
       \item{Shipped production \textbf{SQS-backed ordered delivery for multi-message AI replies}, carrying retry state in each message to preserve compatibility and prevent duplicate AI calls across bounded retries}
       \vspace{-2pt}
@@ -119,21 +119,21 @@
     {\textbf{Freecharge}}{\faCalendar\ Feb '24 -- Jan '26}
     {\small\textbf{Tech:} Node.js, JavaScript, AWS, Redis, MongoDB, Elasticsearch, SQS\par}
     \begin{itemize}
-      \item{Led \textbf{3--4 backend engineers} on a credit-card acquisition and onboarding funnel, owning system/component design, sprint planning, stakeholder alignment, and delivery under aggressive deadlines}
+      \item{Led \textbf{3--4 backend engineers} delivering a credit-card acquisition and onboarding funnel, owning system design, sprint planning, stakeholder alignment, and releases}
       \vspace{-2pt}
-      \item{Spearheaded architecture across AWS SQS, Redis, and Elasticsearch for queue-backed journeys, cache-backed workflows, and search-backed verification paths}
+      \item{Standardized backend service templates with custom linting and security checks, reducing review time by \textbf{50\%} across the credit-card team}
       \vspace{-2pt}
-      \item{Standardized backend service templates with custom linting and security checks, reducing review time by \textbf{50\%} while enforcing consistent service patterns}
+      \item{Eliminated observed state-inconsistency failures on a critical path using read-before-write optimistic concurrency checks and atomic database updates}
       \vspace{-2pt}
-      \item{Diagnosed and resolved production race conditions with optimistic concurrency checks and atomic database updates, eliminating critical state-inconsistency bugs}
+      \item{Built drop-off retargeting with scheduled AWS SQS workflows and UTM-instrumented application-resume links, bringing \textbf{27\% of dropped users} back into the journey}
       \vspace{-2pt}
-      \item{Developed event-driven drop-off retargeting with scheduled AWS SQS workflows, bringing \textbf{27\% of users} back via 40\% WhatsApp, 40\% SMS, and 20\% email}
+      \item{Validated Elasticsearch against PostgreSQL full-text search for lakhs-scale organization matching, reducing lookup latency by approximately \textbf{60\%} in the proof of concept}
       \vspace{-2pt}
-      \item{Integrated Elasticsearch reverse lookup into employment verification, cutting average organization-match latency by approximately \textbf{60\%}}
+      \item{Built BullMQ pre/post-check pipelines that retried work around non-idempotent third-party writes with read-before-write guards, kept users informed during processing, and surfaced failed checks when they returned}
       \vspace{-2pt}
-      \item{Implemented Redis-backed one-time-password notification caching and configurable retry/hard-block rate limits to reduce flooding and abuse risk}
+      \item{Preloaded slow banking-API data into Redis through background BullMQ jobs, reducing perceived wait across credit-card application flows}
       \vspace{-2pt}
-      \item{Designed stateless A/B experimentation using deterministic application bucketing and idempotent recovery from external downtime, boosting funnel efficiency by \textbf{32\%}}
+      \item{Designed stateless A/B experimentation for card recommendations using deterministic application-ID bucketing, improving application-funnel efficiency by \textbf{32\%}}
     \end{itemize}
     \vspace{-4pt}
 
@@ -142,13 +142,13 @@
     {\textbf{BYJU'S}}{\faCalendar\ Sep '22 -- Jan '24}
     {\small\textbf{Tech:} Java, Spring Boot, Node.js, TypeScript, Python, AWS, GCP, Postgres\par}
     \begin{itemize}
-      \item{Built scalable Java/Spring Boot APIs across catalog, payment, and order-management microservices, supporting \textbf{200 requests/second} on high-traffic endpoints}
+      \item{Extended an inherited customer-management service through adapter patterns and minimal-change integration, onboarding acquired school businesses during incremental strangler-pattern retirement of legacy systems}
       \vspace{-2pt}
-      \item{Built end-to-end onboarding and chatbot modules, reducing technical-support queries by \textbf{40\%} through self-serve resolution and automated guidance}
+      \item{Built Node.js, NestJS, and Spring Boot APIs for parent-facing catalog, payment, and order flows on a multi-brand platform operating at approximately \textbf{200 requests/second}}
       \vspace{-2pt}
-      \item{Authored system architecture and sequence diagrams for the order-processing backend, aligning API design, payment flows, and operational handoffs before implementation}
+      \item{Built the API-contract and proxy layer for a Haptik-based self-service assistant, partnering directly with product on conversational flows and reducing technical-support queries by \textbf{40\%}}
       \vspace{-2pt}
-      \item{Tuned PostgreSQL queries and indexes for approximately \textbf{38\% faster reads} on high-traffic endpoints}
+      \item{Improved PostgreSQL read performance by approximately \textbf{38\%} through ORM-query analysis, simple/composite index selection, and query-planner inspection}
     \end{itemize}
 \resumeSubHeadingListEnd
 

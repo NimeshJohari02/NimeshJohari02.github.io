@@ -11,5 +11,5 @@ description: Update Nimesh OS career claims, work stories, portfolio copy, Linke
 4. Ask before adding a new number. Never infer a metric from an implementation detail.
 5. Write the smallest public-safe claim: capability, action, and outcome. Remove private names, URLs, identifiers, payloads, and architecture.
 6. Update the evidence status, guardrail, and snapshot date in the ledger before updating website or resume copy. Record a source class, never a private source URL or path.
-7. Run `npm run check`; it already includes the safety scan and resume build.
+7. Run `npm run check` for safety, lint, and website build. When TeX changed, separately invoke `update-resume` to compile, extract, render, and inspect both layouts; `npm run check` does not build resumes.
 8. External publication, push, LinkedIn edits, or Drive replacement requires explicit approval.
