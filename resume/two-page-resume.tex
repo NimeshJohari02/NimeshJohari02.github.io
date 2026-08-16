@@ -76,25 +76,25 @@
 \section{~~Experience}
 \resumeSubHeadingListStart
   \resumeSubheading
-    {AI Pod Tech Lead}{}
-    {\textbf{Habuild -- AI Platform}}{\faCalendar\ Apr '26 -- Present}
+    {Software Development Engineer 2 \textbar{} AI Pod Tech Lead}{}
+    {\textbf{Habuild -- AI Pod}}{\faCalendar\ Apr '26 -- Present}
     {\small\textbf{Tech:} Python, LangGraph, Langfuse, ClickHouse, OpenAI/Gemini, Qdrant, Redis, Postgres\par}
     \begin{itemize}
-      \item{Lead a \textbf{3-engineer AI team}, owning architecture, delivery, pull-request quality, production reliability, incidents, and cost for a LangGraph platform with \textbf{10+ agents} and \textbf{23 tools} serving \textbf{320K+ user queries/day}}
+      \item{Lead a \textbf{3-engineer AI team}, owning architecture, delivery, pull-request quality, production reliability, incidents, and cost for Habuild's legacy-to-LangGraph AI platform spanning \textbf{30+ tools} and \textbf{48K+ user queries/day}}
+      \vspace{-2pt}
+      \item{Led production hardening of an AI customer-insight pipeline analyzing \textbf{10K+ daily user signals}, generating hourly map-reduce digests with code-computed metrics and verbatim-verified evidence, detecting real-time issue spikes, and enabling natural-language analysis through a six-tool agent}
       \vspace{-2pt}
       \item{Led production model changes across \textbf{14 runtime slots}, centralizing assignments, validating tool-calling and structured-output capabilities, enforcing API/worker fail-fast checks, and attaching model/provider/prompt identity for traceable rollout and rollback}
       \vspace{-2pt}
-      \item{Co-led recovery and storage optimization of a \textbf{self-hosted AI observability stack (Langfuse/ClickHouse)}, reducing trace storage from \textbf{175 GiB to 12 GiB} (\textbf{93\%})}
+      \item{Led shadow-first rollout of receipt-backed mutation guardrails that match completion and handoff claims to same-turn tool outcomes; a \textbf{63K-turn audit} found \textbf{31 unsupported claims}, and live enforcement uses one bounded retry before programmatic escalation}
+      \vspace{-2pt}
+      \item{Co-led recovery and right-sizing of self-hosted \textbf{Langfuse/ClickHouse}, cutting trace storage from \textbf{175 GiB to 12 GiB} (\textbf{93\%}) and matched legacy logs from \textbf{84,674 to 417} while retaining 100\% chat tracing, deterministic worker sampling, and query-level debugging}
       \vspace{-2pt}
       \item{Productionized \textbf{Qdrant hybrid retrieval} using dense question/answer vectors, sparse BM25, HNSW $m$/\textit{ef} tuning, binary quantization, and three-way reciprocal-rank fusion; fixed filter blackouts that hid relevant knowledge}
       \vspace{-2pt}
-      \item{Designed and hardened \textbf{Memory V3} around asynchronous SQS/EventBridge worker ownership, idempotency and stale-event controls, MemoryDB coordination, and fail-open recall outside the chat hot path}
+      \item{Designed and productionized an asynchronous conversational-memory pipeline that turns chats into durable profile facts and ongoing episodes, semantically injects relevant memories into agent context, and manages follow-up lifecycles through idempotent SQS/EventBridge workers}
       \vspace{-2pt}
-      \item{Reduced matched logs in a legacy AI chat system from \textbf{84,674 to 417} by removing redundant/noisy emitters while preserving observation traceability and query-level debugging, targeting \textbf{\textasciitilde\$14/day} savings}
-      \vspace{-2pt}
-      \item{Replaced a \textbf{6$\times$N eligibility-hydration read path} built from repeated SELECTs with one grouped aggregate query on a workflow associated with \textbf{\textasciitilde40M reads}}
-      \vspace{-2pt}
-      \item{Led cleanup of an approximately \textbf{400-file release-branch divergence} and introduced commit-pinned AI-assisted pull-request review gates within the team; trained \textbf{200+ colleagues} on AI-assisted engineering workflows}
+      \item{Collapsed a production \textbf{6$\times$N event-eligibility query fan-out} into one PostgreSQL grouped aggregate, addressing approximately \textbf{40M tiny reads} on the chat-answer path}
     \end{itemize}
 
   \resumeSubheading

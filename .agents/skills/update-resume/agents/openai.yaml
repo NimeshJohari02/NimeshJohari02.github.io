@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update Resume"
+  short_description: "Refresh evidence, TeX, HTML, and HR PDFs"
+  default_prompt: "Use $update-resume to refresh my evidence-backed resume and website safely."

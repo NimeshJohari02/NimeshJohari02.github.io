@@ -76,20 +76,20 @@
 \section{~~Experience}
 \resumeSubHeadingListStart
   \resumeSubheading
-    {AI Pod Tech Lead}{}
-    {\textbf{Habuild -- AI Platform}}{\faCalendar\ Apr '26 -- Present}
+    {Software Development Engineer 2 \textbar{} AI Pod Tech Lead}{}
+    {\textbf{Habuild -- AI Pod}}{\faCalendar\ Apr '26 -- Present}
     \begin{itemize}
-      \item{Lead a \textbf{3-engineer AI team}, owning architecture, delivery, pull-request quality, production reliability, and cost for a \textbf{LangGraph} platform with \textbf{10+ agents} and \textbf{23 tools} serving \textbf{320K+ user queries/day}}
+      \item{Lead a \textbf{3-engineer AI team}, owning architecture, delivery, pull-request quality, reliability, incidents, and cost for Habuild's legacy-to-LangGraph AI platform spanning \textbf{30+ tools} and \textbf{48K+ user queries/day}}
       \vspace{-2pt}
-      \item{Led model changes across \textbf{14 runtime slots}, centralizing assignments, capability/fail-fast validation, and model/provider/prompt provenance for safe rollout and rollback}
+      \item{Led production hardening of an AI customer-insight pipeline analyzing \textbf{10K+ daily signals} into hourly map-reduce digests with code-computed metrics, quote-verified evidence, real-time spike detection, and six-tool natural-language analysis}
       \vspace{-2pt}
-      \item{Co-led recovery and storage optimization of a \textbf{self-hosted AI observability stack (Langfuse/ClickHouse)}, reducing trace storage from \textbf{175 GiB to 12 GiB} (\textbf{93\%})}
+      \item{Led safe model changes across \textbf{14 runtime slots} and shadow-first, receipt-backed mutation guardrails; a \textbf{63K-turn audit} found \textbf{31 unsupported action claims} before bounded retry/escalation enforcement}
       \vspace{-2pt}
-      \item{Productionized \textbf{Memory V3 and Qdrant hybrid retrieval} with asynchronous workers, dense+BM25 fusion, HNSW $m$/\textit{ef} tuning, binary quantization, and fail-open recall}
+      \item{Co-led self-hosted \textbf{Langfuse/ClickHouse} recovery and observability right-sizing, cutting trace storage from \textbf{175 GiB to 12 GiB} and matched legacy logs from \textbf{84,674 to 417} while retaining 100\% chat tracing and deterministic worker sampling}
       \vspace{-2pt}
-      \item{Reduced matched legacy AI-chat logs from \textbf{84,674 to 417} by removing noise while preserving observation traceability and query-level debugging, targeting \textbf{\textasciitilde\$14/day} savings}
+      \item{Designed asynchronous conversational memory that distills chats into durable facts and episodes and semantically injects them into agent context; productionized Qdrant dense+BM25 retrieval, HNSW tuning, quantization, and idempotent SQS/EventBridge lifecycles}
       \vspace{-2pt}
-      \item{Replaced a repeated-SELECT \textbf{6$\times$N eligibility read path} with one grouped aggregate query on a workflow associated with \textbf{\textasciitilde40M reads}}
+      \item{Collapsed a production \textbf{6$\times$N event-eligibility query fan-out} into one PostgreSQL grouped aggregate, addressing approximately \textbf{40M tiny reads} on the chat-answer path}
     \end{itemize}
     \vspace{-4pt}
 
