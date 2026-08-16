@@ -81,13 +81,15 @@
     \begin{itemize}
       \item{Lead a \textbf{3-engineer AI team}, owning architecture, delivery, pull-request quality, production reliability, and cost for a \textbf{LangGraph} platform with \textbf{10+ agents} and \textbf{23 tools} serving \textbf{320K+ user queries/day}}
       \vspace{-2pt}
-      \item{Rolled out the \textbf{GPT-5.6 Luna large language model} across the production AI platform, making model and prompt versions traceable in observability}
+      \item{Led model changes across \textbf{14 runtime slots}, centralizing assignments, capability/fail-fast validation, and model/provider/prompt provenance for safe rollout and rollback}
       \vspace{-2pt}
       \item{Co-led recovery and storage optimization of a \textbf{self-hosted AI observability stack (Langfuse/ClickHouse)}, reducing trace storage from \textbf{175 GiB to 12 GiB} (\textbf{93\%})}
       \vspace{-2pt}
-      \item{Built and deployed asynchronous memory and knowledge pipelines using \textbf{SQS/EventBridge}, AWS MemoryDB, and \textbf{hybrid semantic/keyword retrieval in Qdrant}; seeded all \textbf{406 knowledge records} and validated \textbf{2,779 passing tests}}
+      \item{Productionized \textbf{Memory V3 and Qdrant hybrid retrieval} with asynchronous workers, dense+BM25 fusion, HNSW $m$/\textit{ef} tuning, binary quantization, and fail-open recall}
       \vspace{-2pt}
-      \item{Reduced legacy AI-backend logs from \textbf{84,674 to 417} in controlled pre/post-deployment validation, targeting \textbf{\textasciitilde\$14/day} savings; replaced a \textbf{6$\times$N query pattern with one grouped query} on a path associated with \textbf{\textasciitilde40M reads}}
+      \item{Reduced matched legacy AI-chat logs from \textbf{84,674 to 417} by removing noise while preserving observation traceability and query-level debugging, targeting \textbf{\textasciitilde\$14/day} savings}
+      \vspace{-2pt}
+      \item{Replaced a repeated-SELECT \textbf{6$\times$N eligibility read path} with one grouped aggregate query on a workflow associated with \textbf{\textasciitilde40M reads}}
     \end{itemize}
     \vspace{-4pt}
 
@@ -95,7 +97,7 @@
     {Software Development Engineer 2}{}
     {\textbf{Habuild -- CRM Platform}}{\faCalendar\ Feb '26 -- Mar '26}
     \begin{itemize}
-      \item{Shipped \textbf{SQS-backed ordered delivery for multi-message AI replies} and stabilized \textbf{3 high-value NestJS routes} with \textbf{75 tests}, replacing legacy endpoints failing \textbf{96--100\%} of requests}
+      \item{Shipped \textbf{SQS-backed ordered delivery for multi-message AI replies} without duplicate AI calls and stabilized \textbf{3 high-value routes}, replacing legacy endpoints reported at \textbf{96--100\% failure}}
     \end{itemize}
     \vspace{-4pt}
 
@@ -103,15 +105,15 @@
     {Senior Software Engineer -- Backend}{}
     {\textbf{Freecharge: Node.js, JavaScript, AWS, Redis, MongoDB, Elasticsearch, SQS}}{\faCalendar\ Feb '24 -- Jan '26}
     \begin{itemize}
-      \item{Led \textbf{3--4 backend engineers} on a credit-card acquisition and onboarding funnel, owning system/component design, sprint planning, stakeholder alignment, and delivery under aggressive deadlines}
+      \item{Led \textbf{3--4 backend engineers} delivering a credit-card acquisition and onboarding funnel, owning system design, sprint planning, stakeholder alignment, and releases}
       \vspace{-2pt}
-      \item{Spearheaded backend architecture across AWS SQS, Redis, and Elasticsearch; standardized service templates with custom lint/security checks, reducing review time by \textbf{50\%}}
+      \item{Standardized service templates with custom linting and security checks, reducing review time by \textbf{50\%} across the credit-card team}
       \vspace{-2pt}
-      \item{Diagnosed and resolved production race conditions with optimistic concurrency checks and atomic database updates, eliminating critical state-inconsistency bugs}
+      \item{Built UTM-instrumented drop-off retargeting that brought \textbf{27\% of dropped users} back; designed deterministic A/B card recommendations that improved funnel efficiency by \textbf{32\%}}
       \vspace{-2pt}
-      \item{Built event-driven drop-off retargeting with scheduled AWS SQS workflows, bringing \textbf{27\% of users} back; cut organization lookup latency by approximately \textbf{60\%}}
+      \item{Validated Elasticsearch against PostgreSQL full-text search for lakhs-scale organization matching, reducing lookup latency by approximately \textbf{60\%} in the proof of concept}
       \vspace{-2pt}
-      \item{Designed stateless A/B experimentation with deterministic application bucketing and idempotent recovery from external downtime, boosting funnel efficiency by \textbf{32\%}}
+      \item{Built BullMQ pre/post-check pipelines with read-before-write retry guards around non-idempotent third-party writes and background cache preloading for slow banking APIs}
     \end{itemize}
     \vspace{-4pt}
 
@@ -119,9 +121,11 @@
     {Member of Technical Staff 1}{}
     {\textbf{BYJU'S: Java, Spring Boot, Node.js, TypeScript, Python, AWS, GCP, Postgres}}{\faCalendar\ Sep '22 -- Jan '24}
     \begin{itemize}
-      \item{Built scalable Java/Spring Boot APIs (\textbf{200 requests/second}) across catalog, payment, and order microservices; shipped onboarding and chatbot modules that cut technical-support queries by \textbf{40\%}}
+      \item{Extended an inherited customer system through adapters to onboard acquired school businesses during strangler-pattern retirement; built parent-facing APIs on a platform operating at approximately \textbf{200 requests/second}}
       \vspace{-2pt}
-      \item{Tuned PostgreSQL queries and indexes for approximately \textbf{38\% faster reads}; authored system architecture and sequence diagrams for the order-processing backend}
+      \item{Built the Haptik assistant's proxy/API-contract layer and reduced technical-support queries by \textbf{40\%} through self-service resolution}
+      \vspace{-2pt}
+      \item{Improved PostgreSQL read performance by approximately \textbf{38\%} through ORM-query analysis, simple/composite index selection, and query-planner inspection}
     \end{itemize}
 \resumeSubHeadingListEnd
 
