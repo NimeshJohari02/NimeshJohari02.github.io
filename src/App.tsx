@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
-const panelIds = ['map', 'resume', 'work', 'stories', 'projects', 'learning', 'nerd', 'voice', 'legacy', 'lab'] as const
+const panelIds = ['map', 'search', 'resume', 'work', 'stories', 'projects', 'learning', 'nerd', 'voice', 'legacy', 'lab'] as const
 type Panel = typeof panelIds[number]
 type Story = readonly [tag: string, title: string, body: string]
 
@@ -14,15 +14,15 @@ const links = {
 
 const base = import.meta.env.BASE_URL
 
-const destinations: { id: Panel; label: string; hint: string; className: string }[] = [
-  { id: 'resume', label: 'RESUME.EXE', hint: 'Native career dossier', className: 'resume' },
-  { id: 'work', label: 'WORK.LOG', hint: 'Habuild · Freecharge · BYJU\'S', className: 'work' },
-  { id: 'projects', label: 'PERSONAL.ARTIFACTS', hint: 'Featured builds and the road here', className: 'projects' },
-  { id: 'learning', label: 'LEARNING/', hint: 'DSA, Java, systems and rabbit holes', className: 'learning' },
-  { id: 'nerd', label: 'NERD.STUFF', hint: 'Tiling windows since before it was cool', className: 'nerd' },
-  { id: 'voice', label: 'VOICE.WORKFLOWS', hint: 'Speech-to-text, text-to-speech and terminal agents', className: 'voice' },
-  { id: 'legacy', label: 'LEGACY.HTML', hint: 'The handmade pre-AI website', className: 'legacy' },
-  { id: 'stories', label: 'PRODUCTION.STORIES', hint: 'Things broke. The evidence told the story.', className: 'stories' },
+const destinations: { id: Panel; label: string; hint: string; className: string; keywords: string }[] = [
+  { id: 'resume', label: 'RESUME.EXE', hint: 'Native career dossier', className: 'resume', keywords: 'career experience education study VIT Vellore 2023 graduate skills achievements LangGraph' },
+  { id: 'work', label: 'WORK.LOG', hint: 'Habuild · Freecharge · BYJU\'S', className: 'work', keywords: 'jobs employment backend AI Pod tech lead' },
+  { id: 'projects', label: 'PERSONAL.ARTIFACTS', hint: 'Featured builds and the road here', className: 'projects', keywords: 'portfolio GitHub Go Java React NestJS APIs systems' },
+  { id: 'learning', label: 'LEARNING/', hint: 'DSA, Java, systems and rabbit holes', className: 'learning', keywords: 'college placements LeetCode C C++ distributed systems' },
+  { id: 'nerd', label: 'NERD.STUFF', hint: 'Tiling windows since before it was cool', className: 'nerd', keywords: 'Linux macOS automation AI CLI shortcuts' },
+  { id: 'voice', label: 'VOICE.WORKFLOWS', hint: 'Speech-to-text, text-to-speech and terminal agents', className: 'voice', keywords: 'dictation Flow productivity prompts' },
+  { id: 'legacy', label: 'LEGACY.HTML', hint: 'The handmade pre-AI website', className: 'legacy', keywords: '2021 portfolio HTML CSS Lights Out BoxMaker' },
+  { id: 'stories', label: 'PRODUCTION.STORIES', hint: 'Things broke. The evidence told the story.', className: 'stories', keywords: 'observability releases correctness retrieval CRM debugging models performance customer insight' },
 ]
 
 const featuredProjects = [
@@ -88,8 +88,18 @@ function App() {
 
   useEffect(() => {
     const syncPanel = () => setPanel(panelFromHash())
+    const openSearch = (event: KeyboardEvent) => {
+      if (!event.repeat && (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        window.location.hash = 'search'
+      }
+    }
     window.addEventListener('hashchange', syncPanel)
-    return () => window.removeEventListener('hashchange', syncPanel)
+    window.addEventListener('keydown', openSearch)
+    return () => {
+      window.removeEventListener('hashchange', syncPanel)
+      window.removeEventListener('keydown', openSearch)
+    }
   }, [])
 
   const closePanel = () => {
@@ -102,8 +112,9 @@ function App() {
       <a className="skip-link" href="#map">Skip the room; open the directory</a>
 
       <header className="system-bar">
-        <span className="system-status"><i /> EIGHT REAL HOTSPOTS · HOVER OPTIONAL · TAB WORKS</span>
+        <span className="system-status"><i /> EIGHT REAL HOTSPOTS · HOVER OPTIONAL · TAB / COMMAND K</span>
         <nav aria-label="Primary navigation">
+          <a href="#search" aria-label="Search portfolio, Command or Control K">SEARCH ⌘K</a>
           <a href="#resume">RESUME</a>
           <a href="#stories">PRODUCTION STORIES</a>
           <a href="#projects">PROJECTS</a>
@@ -185,6 +196,7 @@ function InfoPanel({ panel, onClose }: { panel: Panel; onClose: () => void }) {
 
 const panelTitles: Record<Panel, string> = {
   map: 'MAP.EXE · EVERYTHING WORKS WITHOUT THE MAP TOO',
+  search: 'SEARCH.EXE · CMD/CTRL + K',
   resume: 'RESUME.EXE · CAREER.LOG',
   work: 'WORK.LOG',
   stories: 'PRODUCTION.STORIES',
@@ -205,6 +217,7 @@ const panelContent: Record<Panel, React.ReactNode> = {
       <a href="#lab"><b>GLITCH//LAB</b><span>A tiny incident-response toy</span></a>
     </div>
   ),
+  search: <SearchPanel />,
   resume: <ResumePanel />,
   work: (
     <div className="timeline">
@@ -255,6 +268,38 @@ const panelContent: Record<Panel, React.ReactNode> = {
     </div>
   ),
   lab: <GlitchLab />,
+}
+
+function SearchPanel() {
+  const [query, setQuery] = useState('')
+  const normalizedQuery = query.trim().toLowerCase()
+  const results = destinations.filter(({ label, hint, keywords }) =>
+    `${label} ${hint} ${keywords}`.toLowerCase().includes(normalizedQuery),
+  )
+
+  return (
+    <section className="search-panel" aria-labelledby="search-label">
+      <label id="search-label" htmlFor="portfolio-search">Search portfolio terms</label>
+      <input
+        autoFocus
+        id="portfolio-search"
+        type="search"
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+        placeholder="Try: production stories, AI Pod, projects…"
+      />
+      <p className="search-status" aria-live="polite">{results.length} result{results.length === 1 ? '' : 's'}</p>
+      {results.length > 0 ? (
+        <ul className="search-results">
+          {results.map(({ id, label, hint }) => (
+            <li key={id}>
+              <a href={`#${id}`}><b>{label}</b><span>{hint}</span></a>
+            </li>
+          ))}
+        </ul>
+      ) : <p className="search-empty">NO MATCHES. TRY ANOTHER TERM.</p>}
+    </section>
+  )
 }
 
 function ProjectsPanel() {
@@ -350,6 +395,7 @@ function ResumePanel() {
             <li>2026-habuild-crm.log</li>
             <li>2024-freecharge.log</li>
             <li>2022-byjus.log</li>
+            <li>study.log</li>
             <li>systems.cfg</li>
             <li>achievements.log</li>
           </ol>
@@ -384,6 +430,13 @@ function ResumePanel() {
             <div className="career-entry">
               <p>Built Java and Spring Boot catalog, order, payment and cancellation services, plus onboarding and support automation using Node.js, TypeScript and Python.</p>
               <p>Shipped APIs supporting 200 requests/second, self-serve automation that reduced technical-support queries by 40%, and database work that made reads approximately 38% faster.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>study.log</span><small>VIT VELLORE · B.TECH IT · 2023</small></summary>
+            <div className="career-entry">
+              <p>Graduated from Vellore Institute of Technology, Vellore, in 2023 with a B.Tech in Information Technology.</p>
             </div>
           </details>
 

@@ -2,7 +2,7 @@
 
 This is the publishable claim ledger for the portfolio, LinkedIn, GitHub profile, and resumes. It is intentionally smaller than the private evidence archive. The private archive contains internal links and operational detail that must not enter a public repository.
 
-Snapshot date: 16 August 2026.
+Snapshot date: 19 August 2026.
 
 ## Habuild
 
@@ -48,6 +48,7 @@ Snapshot date: 16 August 2026.
 
 ## Personal identity
 
+- Graduated from Vellore Institute of Technology, Vellore, in 2023 with a B.Tech in Information Technology: user-confirmed education claim; the degree and institution are also present in both canonical TeX resume sources.
 - Friendly Neighborhood AI Prompt Tuner: playful personal tagline, not a formal job title.
 - Google Kick Start 2021 Round G global rank 6995: user-approved public achievement backed by a public certificate link. The exact certificate URL may appear only in both TeX resume sources, not in the website build.
 - Uses AI heavily while reviewing code, testing claims, and owning the final judgment.
