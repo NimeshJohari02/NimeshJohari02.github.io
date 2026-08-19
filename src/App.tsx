@@ -13,6 +13,9 @@ const links = {
 } as const
 
 const base = import.meta.env.BASE_URL
+const roomImage = `${base}concepts/nerd-cave-billu.webp`
+const mobileRoomImage = `${base}concepts/nerd-cave-billu-mobile.webp`
+const mobileRoomMedia = '(max-width: 1024px), (hover: none), (pointer: coarse)'
 
 const destinations: { id: Panel; label: string; hint: string; className: string; keywords: string }[] = [
   { id: 'resume', label: 'RESUME.EXE', hint: 'Native career dossier', className: 'resume', keywords: 'career experience education study VIT Vellore 2023 graduate skills achievements LangGraph' },
@@ -139,10 +142,12 @@ function App() {
       </section>
 
       <section className="cave" aria-label="Interactive Nerd Cave">
-        <img className="directory-background" src={`${base}concepts/nerd-cave-billu.webp`} alt="" />
         <div className="scene-frame">
           <div className="scene-layer">
-            <img src={`${base}concepts/nerd-cave-billu.webp`} alt="Pixel-art developer room with eight interactive objects and Billu Bhai resting on a green chair" />
+            <picture className="scene-art">
+              <source media={mobileRoomMedia} srcSet={mobileRoomImage} />
+              <img src={roomImage} alt="Pixel-art developer room with eight interactive objects and Billu Bhai resting on a green chair" />
+            </picture>
             <div className="cave-shade" />
 
             <nav className="desktop-hotspots" aria-label="Objects in the Nerd Cave">
@@ -163,6 +168,10 @@ function App() {
             <a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
           </div>
         </nav>
+        <picture className="mobile-room-overview">
+          <source media={mobileRoomMedia} srcSet={mobileRoomImage} />
+          <img src={roomImage} alt="Complete pixel-art Nerd Cave with eight labeled objects, Billu Bhai on the green chair, and the Galaxy Always Home rug" />
+        </picture>
       </section>
 
       {panel && <InfoPanel panel={panel} onClose={closePanel} />}
