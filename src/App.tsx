@@ -184,6 +184,7 @@ function InfoPanel({ panel, onClose }: { panel: Panel; onClose: () => void }) {
 
   useEffect(() => {
     ref.current?.showModal()
+    ref.current?.querySelector<HTMLInputElement>('input[type="search"]')?.focus()
   }, [])
 
   return (
@@ -281,28 +282,67 @@ const panelContent: Record<Panel, React.ReactNode> = {
 
 function SearchPanel() {
   const [query, setQuery] = useState('')
+  const [activeIndex, setActiveIndex] = useState(0)
   const normalizedQuery = query.trim().toLowerCase()
   const results = destinations.filter(({ label, hint, keywords }) =>
     `${label} ${hint} ${keywords}`.toLowerCase().includes(normalizedQuery),
   )
+  const activeResult = results[activeIndex]
+  const activeResultId = activeResult ? `search-result-${activeResult.id}` : ''
+
+  useEffect(() => {
+    document.getElementById(activeResultId)?.scrollIntoView({ block: 'nearest' })
+  }, [activeResultId])
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!activeResult) return
+    if (event.key === 'ArrowDown') {
+      event.preventDefault()
+      setActiveIndex((index) => Math.min(index + 1, results.length - 1))
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault()
+      setActiveIndex((index) => Math.max(index - 1, 0))
+    } else if (event.key === 'Enter') {
+      event.preventDefault()
+      window.location.hash = activeResult.id
+    }
+  }
 
   return (
     <section className="search-panel" aria-labelledby="search-label">
       <label id="search-label" htmlFor="portfolio-search">Search portfolio terms</label>
       <input
+        aria-activedescendant={activeResultId || undefined}
+        aria-autocomplete="list"
+        aria-controls={results.length > 0 ? 'search-results' : undefined}
+        aria-expanded={results.length > 0}
+        autoComplete="off"
         autoFocus
         id="portfolio-search"
+        role="combobox"
         type="search"
         value={query}
-        onChange={(event) => setQuery(event.target.value)}
+        onChange={(event) => {
+          setQuery(event.target.value)
+          setActiveIndex(0)
+        }}
+        onKeyDown={handleKeyDown}
         placeholder="Try: production stories, AI Pod, projects…"
       />
       <p className="search-status" aria-live="polite">{results.length} result{results.length === 1 ? '' : 's'}</p>
       {results.length > 0 ? (
-        <ul className="search-results">
-          {results.map(({ id, label, hint }) => (
-            <li key={id}>
-              <a href={`#${id}`}><b>{label}</b><span>{hint}</span></a>
+        <ul className="search-results" id="search-results" role="listbox">
+          {results.map(({ id, label, hint }, index) => (
+            <li key={id} role="presentation">
+              <a
+                aria-selected={index === activeIndex}
+                href={`#${id}`}
+                id={`search-result-${id}`}
+                onMouseEnter={() => setActiveIndex(index)}
+                role="option"
+              >
+                <b>{label}</b><span>{hint}</span>
+              </a>
             </li>
           ))}
         </ul>
