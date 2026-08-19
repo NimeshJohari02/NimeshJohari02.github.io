@@ -47,10 +47,10 @@ button { color: inherit; }
 .intro-links a:hover, .intro-links a:focus-visible { outline: none; color: var(--ink); background: var(--phosphor); }
 
 .cave { position: relative; padding-bottom: 2rem; }
-.directory-background { display: none; }
+.mobile-room-overview { display: none; }
 .scene-frame { position: relative; width: 100%; aspect-ratio: 1672 / 581; overflow: hidden; border-block: 1px solid var(--line); background: var(--ink); }
 .scene-layer { position: absolute; inset: 0 0 auto; width: 100%; aspect-ratio: 1672 / 941; transform: translateY(-20.2%); }
-.scene-layer > img { display: block; width: 100%; height: 100%; }
+.scene-art, .scene-art > img { display: block; width: 100%; height: 100%; }
 .cave-shade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.22), transparent 28% 72%, rgba(0,0,0,.2)); }
 .desktop-hotspots { position: absolute; inset: 0; }
 
@@ -185,8 +185,9 @@ button { color: inherit; }
 
 @media (max-width: 1024px), (hover: none), (pointer: coarse) {
   .scene-frame { display: none; }
-  .cave { min-height: calc(100svh - 56px); padding: 1rem; background: var(--ink); }
-  .directory-background { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .22; filter: saturate(.7); }
+  .cave { padding: 1rem; background: var(--ink); }
+  .mobile-room-overview { display: block; width: min(100%, 900px); margin: 1rem auto 0; border: 1px solid var(--line); background: #050504; }
+  .mobile-room-overview > img { display: block; width: 100%; height: auto; }
   .directory { position: relative; z-index: 4; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; max-width: 900px; margin: 0 auto; }
   .directory > p, .directory-socials { grid-column: 1 / -1; }
   .directory > p { margin: 0 0 .25rem; color: var(--amber); font-size: .72rem; letter-spacing: .1em; }
