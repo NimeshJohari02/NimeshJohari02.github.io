@@ -115,7 +115,7 @@ function App() {
       <a className="skip-link" href="#map">Skip the room; open the directory</a>
 
       <header className="system-bar">
-        <span className="system-status"><i /> EIGHT REAL HOTSPOTS · HOVER OPTIONAL · TAB / COMMAND K</span>
+        <span className="system-status"><i /> ELEVEN REAL HOTSPOTS · HOVER OPTIONAL · TAB / COMMAND K</span>
         <nav aria-label="Primary navigation">
           <a href="#search" aria-label="Search portfolio, Command or Control K">SEARCH ⌘K</a>
           <a href="#resume">RESUME</a>
@@ -154,6 +154,9 @@ function App() {
               {destinations.map(({ id, label, hint, className }) => (
                 <a className={`hotspot hotspot--${className}`} href={`#${id}`} key={id} aria-label={`${label}: ${hint}`} />
               ))}
+              <a className="hotspot hotspot--dock-resume" href="#resume" aria-label="Bottom dock Resume" />
+              <a className="hotspot hotspot--dock-projects" href="#projects" aria-label="Bottom dock Projects" />
+              <a className="hotspot hotspot--dock-map" href="#map" aria-label="Bottom dock Map" />
             </nav>
           </div>
         </div>
@@ -168,13 +171,20 @@ function App() {
             <a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
           </div>
         </nav>
-        <picture className="mobile-room-overview">
-          <source media={mobileRoomMedia} srcSet={mobileRoomImage} />
-          <img src={roomImage} alt="Complete pixel-art Nerd Cave with eight labeled objects, Billu Bhai on the green chair, and the Galaxy Always Home rug" />
-        </picture>
+        <div className="mobile-room-overview">
+          <picture>
+            <source media={mobileRoomMedia} srcSet={mobileRoomImage} />
+            <img src={roomImage} alt="Complete pixel-art Nerd Cave with eight labeled objects, Billu Bhai on the green chair, and the Galaxy Always Home rug" />
+          </picture>
+          <nav className="mobile-dock-hotspots" aria-label="Bottom dock controls">
+            <a className="hotspot hotspot--dock-resume" href="#resume" aria-label="Bottom dock Resume" />
+            <a className="hotspot hotspot--dock-projects" href="#projects" aria-label="Bottom dock Projects" />
+            <a className="hotspot hotspot--dock-map" href="#map" aria-label="Bottom dock Map" />
+          </nav>
+        </div>
       </section>
 
-      {panel && <InfoPanel panel={panel} onClose={closePanel} />}
+      {panel && <InfoPanel key={panel} panel={panel} onClose={closePanel} />}
     </main>
   )
 }
@@ -215,7 +225,7 @@ const panelTitles: Record<Panel, string> = {
   nerd: 'NERD.STUFF',
   voice: 'VOICE.WORKFLOWS',
   legacy: 'LEGACY.HTML · PRE-AI ARTIFACT',
-  lab: 'GLITCH//LAB',
+  lab: 'GLITCH//LAB · AFTER HOURS',
 }
 
 const panelContent: Record<Panel, React.ReactNode> = {
@@ -224,7 +234,7 @@ const panelContent: Record<Panel, React.ReactNode> = {
       {destinations.map(({ id, label, hint }) => (
         <a href={`#${id}`} key={id}><b>{label}</b><span>{hint}</span></a>
       ))}
-      <a href="#lab"><b>GLITCH//LAB</b><span>A tiny incident-response toy</span></a>
+      <a href="#lab"><b>GLITCH//LAB</b><span>Private after-hours experiments</span></a>
     </div>
   ),
   search: <SearchPanel />,
@@ -520,22 +530,25 @@ function ResumePanel() {
 }
 
 function GlitchLab() {
-  const [result, setResult] = useState('LATENCY appeared. Choose a diagnostic move.')
-  const moves = {
-    TRACE: 'Trace found the slow edge. Suspicion is now evidence.',
-    CACHE: 'Cache checked. It was innocent this time.',
-    ROLLBACK: 'Last boringly reliable release restored.',
-    'PROMPT TUNE': 'Prompt improved. Hallucination remains undefeated, but annoyed.',
-  }
-
   return (
-    <div className="glitch-lab">
-      <div className="duel" aria-hidden="true"><span>▓░▒</span><b>VS</b><span>⌁BUG⌁</span></div>
-      <p className="battle-log" aria-live="polite">{result}</p>
-      <div className="move-grid">
-        {Object.entries(moves).map(([move, message]) => (
-          <button type="button" key={move} onClick={() => setResult(message)}>{move}</button>
-        ))}
+    <div>
+      <p className="lede">After-hours sidequests: private notes, unfinished systems and experiments that keep the curiosity loop running.</p>
+      <div className="story-grid">
+        <article>
+          <p>01 · AGENTIC AI</p>
+          <h2>Architecture, experiments, decisions</h2>
+          <span>A private workbench connecting agent-system architecture decisions, experiments and learning notes.</span>
+        </article>
+        <article>
+          <p>02 · JAVA FUNDAMENTALS</p>
+          <h2>Small builds, big whiteboards</h2>
+          <span>Private, messy practice across concurrency, low-level design drills, traffic systems, parking lots and small Java builds.</span>
+        </article>
+        <article>
+          <p>03 · LINUX WORKSPACE</p>
+          <h2>The desk is still under construction</h2>
+          <span>A long-running workspace archive for AwesomeWM/Lua, Alacritty, Picom, Thunar and terminal configuration tinkering.</span>
+        </article>
       </div>
     </div>
   )
