@@ -25,7 +25,7 @@ const destinations: { id: Panel; label: string; hint: string; className: string;
   { id: 'nerd', label: 'NERD.STUFF', hint: 'Tiling windows since before it was cool', className: 'nerd', keywords: 'Linux macOS automation AI CLI shortcuts' },
   { id: 'voice', label: 'VOICE.WORKFLOWS', hint: 'Speech-to-text, text-to-speech and terminal agents', className: 'voice', keywords: 'dictation Flow productivity prompts' },
   { id: 'legacy', label: 'LEGACY.HTML', hint: 'The handmade pre-AI website', className: 'legacy', keywords: '2021 portfolio HTML CSS Lights Out BoxMaker' },
-  { id: 'stories', label: 'PRODUCTION.STORIES', hint: 'Things broke. The evidence told the story.', className: 'stories', keywords: 'observability releases correctness retrieval CRM debugging models performance customer insight' },
+  { id: 'stories', label: 'PRODUCTION.STORIES', hint: 'Architecture, launches and the evidence behind them.', className: 'stories', keywords: 'integration cancellation human takeover evaluation cost observability releases correctness retrieval CRM debugging models performance customer insight' },
 ]
 
 const featuredProjects = [
@@ -69,15 +69,19 @@ const buildHistory = [
 ] as const
 
 const stories: Story[] = [
+  ['AGENT SYSTEMS', 'From an answer engine to a conversation platform', 'Led the architecture and production launch of a direct CRM-to-agent integration for an AI platform handling 19K+ daily chat turns. The difficult boundary was deciding who could act and who could reply as messages, retries and human operators arrived together. Ordered processing, in-flight cancellation, human takeover, duplicate protection and recovery became part of the conversation model, with a phased rollout and a clear rollback path.'],
+  ['PRODUCTION RELIABILITY', 'Put confidence behind the launch', 'Built confidence in the launch through production tracing and broad evaluations of conversation, retrieval and memory quality. Recorded execution errors were under 0.01% for model generations and 0.02% for business tools. Synthetic-fixture testing and receipt-backed action guardrails add checks around the conversations that change something for a member.'],
+  ['MODEL ECONOMICS', 'A production platform that earns its model spend', 'The agent platform ran at about $1.4 in model spend per 1,000 answered-or-escalated turns. Overall daily OpenAI model spend was about 36% lower across the rollout. Cost became a first-class production concern alongside quality and reliability, with provider billing grounding the results.'],
+  ['CANCELLATION', 'A human reply changes what the system may do', 'Designed cancellation around the difference between generating an answer and changing something for a member. A newer message can replace work before a side effect starts; a human takeover stops the bot from replying. Thread repair and stored-result replay help the next turn recover coherently. The design makes conversation ownership explicit across the services that compute and deliver an answer.'],
   ['01 · OBSERVABILITY', 'The disk that ate the traces', 'Co-led recovery and retention work for self-hosted Langfuse/ClickHouse. Trace storage fell from 175 GiB to 12 GiB without turning observability off.'],
   ['02 · RELEASES', 'Four hundred files apart', 'Led cleanup of a roughly 400-file staging/main divergence and restored a controlled promotion path.'],
   ['03 · CORRECTNESS', 'Shadow first, enforce second', 'Led receipt-backed guardrails that match action claims to same-turn tool outcomes. A 63K-turn audit found 31 unsupported claims before bounded retry and escalation enforcement.'],
   ['04 · RETRIEVAL', 'Memory needs boring machinery', 'Designed asynchronous memory that distills chats into durable facts and episodes, retrieves the relevant pieces into agent context and keeps follow-up work off the chat hot path.'],
   ['05 · CRM', 'Replies must arrive in order', 'Shipped queue-backed multi-response delivery with bounded retries and duplicate-call protection for a high-throughput messaging system.'],
   ['06 · DEBUGGING', 'Follow the whole failure', 'Trace input, routing, tools, state, downstream effects and delivery. Preserve “unknown” when telemetry ends instead of inventing an RCA.'],
-  ['07 · MODELS', 'Changing the engine mid-flight', 'Led model changes across 14 runtime slots with capability checks, fail-fast validation, fallback boundaries and model, provider and prompt identity in observability.'],
+  ['07 · MODELS', 'Changing the engine mid-flight', 'Led production model rollouts with centralized routing, capability checks, fail-fast validation, fallbacks and rollback controls, preserving model, provider and prompt provenance.'],
   ['08 · PERFORMANCE', 'One grouped read beats a query fan-out', 'Collapsed repeated eligibility lookups into a grouped query on a high-read path, then used planner and runtime evidence to validate the result.'],
-  ['09 · CUSTOMER INSIGHT', 'Ten thousand signals need evidence', 'Led production hardening of hourly customer-insight digests with code-computed metrics, quote-verified evidence, real-time spike detection and six-tool natural-language analysis.'],
+  ['09 · CUSTOMER INSIGHT', 'From 50K+ messages to actionable insight', 'Led production hardening of a customer-insight pipeline processing 50K+ messages/day at peak. It distilled 37K+ non-noise signals into evidence-backed digests, detected issue spikes and supported natural-language analysis through six tools. Code-computed metrics and quote-verified evidence made the output useful for product decisions.'],
   ['10 · ENGINEERING SYSTEMS', 'Review the code that will actually run', 'Introduced AI-assisted exact-head review gates inside the Pod and led cleanup of release drift before adding more features.'],
 ]
 
@@ -133,7 +137,7 @@ function App() {
         </div>
         <h1 id="page-title">Nimesh Johari</h1>
         <p className="role">AI Pod Tech Lead · Production Agent Systems · Distributed Backends</p>
-        <p className="proof">Leading a three-developer AI Pod across architecture, delivery, reliability, evaluation, observability and cost.</p>
+        <p className="proof">Led a three-person AI Pod from agent architecture to production delivery, with ownership of reliability, evaluation, observability and cost.</p>
         <div className="intro-links">
           <a className="primary" href="#resume">OPEN RESUME</a>
           <a href="#stories">READ PRODUCTION STORIES</a>
@@ -241,8 +245,8 @@ const panelContent: Record<Panel, React.ReactNode> = {
   resume: <ResumePanel />,
   work: (
     <div className="timeline">
-      <article><time>2026 — NOW</time><h2>Habuild · AI Pod Tech Lead</h2><p>Lead a three-developer Pod across architecture, delivery, PR quality, reliability and cost for a legacy-to-LangGraph AI platform spanning 30+ tools and 48K+ daily user queries.</p><p>Productionized customer-insight, conversational-memory and receipt-backed correctness systems after starting in CRM engineering on ordered messaging, retries, caching, search and recovery.</p></article>
-      <article><time>2024 — 2026</time><h2>Freecharge · Senior Software Engineer, Backend</h2><p>Led 3–4 backend engineers on credit-card acquisition. Built event-driven journeys with SQS, Redis and Elasticsearch; shipped reliability, experimentation and recovery work.</p></article>
+      <article><time>2026 — NOW</time><h2>Habuild · AI Pod Tech Lead</h2><p>Led a three-person AI Pod across architecture, delivery, reliability and cost for a production LangGraph platform spanning 30+ tools. Led the architecture and launch of a direct CRM-to-agent integration for an AI platform handling 19K+ daily chat turns, with ordered conversations, in-flight cancellation, human takeover and failure recovery.</p><p>Paired production tracing with conversation, retrieval and memory evaluations. Recorded model-generation errors were under 0.01% and business-tool execution errors under 0.02%, alongside customer-insight and receipt-backed correctness systems.</p></article>
+      <article><time>2024 — 2026</time><h2>Freecharge · Senior Software Engineer, Backend</h2><p>Led 3 backend engineers on credit-card acquisition. Built event-driven journeys with SQS, Redis and Elasticsearch; shipped reliability, experimentation and recovery work.</p></article>
       <article><time>2022 — 2024</time><h2>BYJU'S · Member of Technical Staff 1</h2><p>Built Java/Spring Boot catalog, payment and order services, then onboarding and chatbot workflows that made common support problems self-serve.</p></article>
     </div>
   ),
@@ -271,7 +275,7 @@ const panelContent: Record<Panel, React.ReactNode> = {
   voice: (
     <div>
       <p className="lede">A keyboard is occasionally the slow fallback path.</p>
-      <p>Flow currently records <strong>154 WPM</strong>—top <strong>0.1%</strong>—with <strong>126,503 words</strong> dictated across <strong>45 apps</strong>. Speech-to-text handles context dumps, prompts and rough specs.</p>
+      <p>Wispr Flow records <strong>217K words</strong> dictated at <strong>161 WPM</strong>, with a <strong>37-day streak</strong>. Speech-to-text handles context dumps, prompts and rough specs.</p>
       <p>Text-to-speech handles long rereads; the diff still gets inspected, tests still run and judgment stays manual.</p>
     </div>
   ),
@@ -420,7 +424,7 @@ function StoriesPanel() {
     <div className="stories-panel">
       <div className="story-grid">{stories.slice(0, 3).map(renderStory)}</div>
       <details>
-        <summary>VIEW 7 MORE STORIES ↓</summary>
+        <summary>VIEW {stories.length - 3} MORE STORIES ↓</summary>
         <div className="story-grid">{stories.slice(3).map(renderStory)}</div>
       </details>
     </div>
@@ -440,7 +444,7 @@ function ResumePanel() {
         <h3 id="career-scan-title">AI Pod Tech Lead · Backend engineer · Friendly Neighborhood AI Prompt Tuner</h3>
         <p>Production agent systems, distributed backends and the boring reliability machinery that keeps both useful.</p>
         <ul className="career-facts">
-          <li><b>NOW</b><span>Leading a three-developer AI Pod at Habuild</span></li>
+          <li><b>NOW</b><span>AI Pod Tech Lead at Habuild · Led a three-person Pod</span></li>
           <li><b>FOCUS</b><span>Agent systems, distributed backends, reliability</span></li>
           <li><b>PATH</b><span>BYJU'S → Freecharge → Habuild</span></li>
         </ul>
@@ -464,8 +468,10 @@ function ResumePanel() {
           <details open>
             <summary><span>now-habuild-ai.log</span><small>AI POD TECH LEAD · 2026—NOW</small></summary>
             <div className="career-entry">
-              <p>Lead three developers across architecture, delivery, review quality, reliability and cost for Habuild's legacy-to-LangGraph AI platform spanning 30+ tools and 48K+ daily user queries.</p>
-              <p>Led an AI customer-insight pipeline analyzing 10K+ daily signals; productionized conversational memory, hybrid retrieval and receipt-backed mutation guardrails.</p>
+              <p>Led a three-person AI Pod across architecture, delivery, model releases, reliability and cost for Habuild's production LangGraph platform spanning 30+ tools.</p>
+              <p>Led the architecture and production launch of a direct CRM-to-agent integration for an AI platform handling 19K+ daily chat turns, with in-flight cancellation, human takeover, ordered delivery, duplicate protection and failure recovery.</p>
+              <p>Backed the launch with end-to-end production tracing, LLM-as-a-Judge evaluations and synthetic-fixture regression testing. Recorded execution errors were under 0.01% for model generations and 0.02% for business tools; evaluations cover conversation, retrieval and memory quality.</p>
+              <p>The agent platform operated at about $1.4 in model spend per 1,000 answered-or-escalated turns. Led a customer-insight pipeline processing 50K+ messages/day at peak, distilling 37K+ signals into evidence-backed digests and productionized <strong>episodic memory</strong>, Qdrant hybrid retrieval with <strong>binary quantization</strong>, and receipt-backed action guardrails.</p>
             </div>
           </details>
 
@@ -479,7 +485,7 @@ function ResumePanel() {
           <details>
             <summary><span>2024-freecharge.log</span><small>SENIOR SOFTWARE ENGINEER · 2024—2026</small></summary>
             <div className="career-entry">
-              <p>Led 3–4 backend engineers on credit-card acquisition and owned design, planning, stakeholder alignment and delivery.</p>
+              <p>Led 3 backend engineers on credit-card acquisition and owned design, planning, stakeholder alignment and delivery.</p>
               <p>Shipped event-driven journeys and reliability controls with SQS, Redis, MongoDB and Elasticsearch; brought 27% of drop-off users back and reduced organization-lookup latency by approximately 60%.</p>
             </div>
           </details>
@@ -511,10 +517,12 @@ function ResumePanel() {
           <details>
             <summary><span>achievements.log</span><small>SELECTED SYSTEM OUTCOMES</small></summary>
             <ul className="career-entry plain-list">
+              <li>Led the architecture and production launch of the direct CRM-to-agent integration for an AI platform handling 19K+ daily chat turns, including cancellation and human takeover.</li>
+              <li>Combined production tracing and broad evaluations with recorded execution errors under 0.01% for model generations and 0.02% for business tools.</li>
               <li>Co-led Langfuse and ClickHouse reliability work that reduced storage from 175 GiB to 12 GiB.</li>
               <li>Led cleanup of an approximately 400-file staging/main divergence and restored a controlled release path.</li>
-              <li>Led model changes across 14 runtime slots with capability, rollout and observability guardrails.</li>
-              <li>Trained 200+ colleagues on Claude Code and AI-assisted workflows.</li>
+              <li>Led production model rollouts with centralized routing, capability checks, fallbacks and rollback controls.</li>
+              <li>Mentored engineers through system-design and code reviews, guiding technical decisions and production delivery.</li>
             </ul>
           </details>
         </div>
