@@ -1,7 +1,10 @@
 # The Nerd Cave
 
-Nimesh Johari's retro, interactive portfolio. One room, eight clickable objects,
-and a normal directory for anyone who does not want to hunt through pixel art.
+Nimesh Johari's interactive portfolio: a photorealistic 2.5D room (one canvas,
+a painted room plate and sprite sheets in `public/room/`, walk geometry in
+`src/room/scene.ts`) with ten objects that open portfolio panels, Galaxy roaming
+between his bean bag, rug and cat tree, and a normal directory (`MAP`, `⌘K`) for
+anyone who does not want to walk around.
 
 ```bash
 npm install

@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import './App.css'
+
+const Room = lazy(() => import('./room/Room'))
 
 const panelIds = ['map', 'search', 'resume', 'work', 'stories', 'projects', 'learning', 'nerd', 'voice', 'legacy', 'lab'] as const
 type Panel = typeof panelIds[number]
@@ -11,11 +13,6 @@ const links = {
   leetcodeGrind: 'https://github.com/NimeshJohari02/LeetCodeGrind',
   linkedin: 'https://www.linkedin.com/in/nimeshjohari02/',
 } as const
-
-const base = import.meta.env.BASE_URL
-const roomImage = `${base}concepts/nerd-cave-billu.webp`
-const mobileRoomImage = `${base}concepts/nerd-cave-billu-mobile.webp`
-const mobileRoomMedia = '(max-width: 1024px), (hover: none), (pointer: coarse)'
 
 const destinations: { id: Panel; label: string; hint: string; className: string; keywords: string }[] = [
   { id: 'resume', label: 'RESUME.EXE', hint: 'Native career dossier', className: 'resume', keywords: 'career experience education study VIT Vellore 2023 graduate skills achievements LangGraph' },
@@ -85,6 +82,12 @@ const stories: Story[] = [
   ['10 · ENGINEERING SYSTEMS', 'Review the code that will actually run', 'Introduced AI-assisted exact-head review gates inside the Pod and led cleanup of release drift before adding more features.'],
 ]
 
+const objectLabels: Record<string, string> = {
+  ...Object.fromEntries(destinations.map(({ id, label }) => [id, label])),
+  map: 'MAP.EXE',
+  lab: 'GLITCH//LAB',
+}
+
 function panelFromHash(): Panel | null {
   const hash = window.location.hash.slice(1) as Panel
   return panelIds.includes(hash) ? hash : null
@@ -114,79 +117,32 @@ function App() {
     setPanel(null)
   }
 
+  const [webgl, setWebgl] = useState(true)
+  const openObject = useCallback((id: string) => { window.location.hash = id }, [])
+  const onFail = useCallback(() => setWebgl(false), [])
+
   return (
     <main className="os-shell">
-      <a className="skip-link" href="#map">Skip the room; open the directory</a>
-
-      <header className="system-bar">
-        <span className="system-status"><i /> ELEVEN REAL HOTSPOTS · HOVER OPTIONAL · TAB / COMMAND K</span>
-        <nav aria-label="Primary navigation">
-          <a href="#search" aria-label="Search portfolio, Command or Control K">SEARCH ⌘K</a>
-          <a href="#resume">RESUME</a>
-          <a href="#stories">PRODUCTION STORIES</a>
-          <a href="#projects">PROJECTS</a>
-          <a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
-          <a href={links.email}>CONTACT</a>
-        </nav>
-      </header>
-
-      <section className="intro" aria-labelledby="page-title">
-        <div className="intro-meta">
-          <p className="eyebrow">THE NERD CAVE</p>
-          <p className="billu-note">billu bhai -- here, like always &lt;3</p>
-        </div>
-        <h1 id="page-title">Nimesh Johari</h1>
-        <p className="role">AI Pod Tech Lead · Production Agent Systems · Distributed Backends</p>
-        <p className="proof">Led a three-person AI Pod from agent architecture to production delivery, with ownership of reliability, evaluation, observability and cost.</p>
-        <div className="intro-links">
-          <a className="primary" href="#resume">OPEN RESUME</a>
-          <a href="#stories">READ PRODUCTION STORIES</a>
-          <a href={links.github} target="_blank" rel="noreferrer">VIEW GITHUB ↗</a>
-        </div>
-      </section>
-
-      <section className="cave" aria-label="Interactive Nerd Cave">
-        <div className="scene-frame">
-          <div className="scene-layer">
-            <picture className="scene-art">
-              <source media={mobileRoomMedia} srcSet={mobileRoomImage} />
-              <img src={roomImage} alt="Pixel-art developer room with eight interactive objects and Billu Bhai resting on a green chair" />
-            </picture>
-            <div className="cave-shade" />
-
-            <nav className="desktop-hotspots" aria-label="Objects in the Nerd Cave">
-              {destinations.map(({ id, label, hint, className }) => (
-                <a className={`hotspot hotspot--${className}`} href={`#${id}`} key={id} aria-label={`${label}: ${hint}`} />
-              ))}
-              <a className="hotspot hotspot--dock-resume" href="#resume" aria-label="Bottom dock Resume" />
-              <a className="hotspot hotspot--dock-projects" href="#projects" aria-label="Bottom dock Projects" />
-              <a className="hotspot hotspot--dock-map" href="#map" aria-label="Bottom dock Map" />
-            </nav>
-          </div>
-        </div>
-        <nav className="directory" id="map" aria-label="Nerd Cave directory">
-          <p>ROOM DIRECTORY</p>
+      <h1 className="sr-only">Nimesh Johari — AI Pod Tech Lead</h1>
+      {webgl ? (
+        <Suspense fallback={null}>
+          <Room labels={objectLabels} onOpen={openObject} onFail={onFail} />
+        </Suspense>
+      ) : (
+        <div className="directory-grid cave-fallback">
           {destinations.map(({ id, label, hint }) => (
             <a href={`#${id}`} key={id}><b>{label}</b><span>{hint}</span></a>
           ))}
-          <div className="directory-socials">
-            <a href={links.email}>EMAIL</a>
-            <a href={links.linkedin} target="_blank" rel="noreferrer">LINKEDIN ↗</a>
-            <a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
-          </div>
-        </nav>
-        <div className="mobile-room-overview">
-          <picture>
-            <source media={mobileRoomMedia} srcSet={mobileRoomImage} />
-            <img src={roomImage} alt="Complete pixel-art Nerd Cave with eight labeled objects, Billu Bhai on the green chair, and the Galaxy Always Home rug" />
-          </picture>
-          <nav className="mobile-dock-hotspots" aria-label="Bottom dock controls">
-            <a className="hotspot hotspot--dock-resume" href="#resume" aria-label="Bottom dock Resume" />
-            <a className="hotspot hotspot--dock-projects" href="#projects" aria-label="Bottom dock Projects" />
-            <a className="hotspot hotspot--dock-map" href="#map" aria-label="Bottom dock Map" />
-          </nav>
         </div>
-      </section>
+      )}
+
+      <nav className="room-menu" aria-label="Portfolio">
+        <a href="#map">MAP</a>
+        <a href="#search" aria-label="Search portfolio, Command or Control K">⌘K</a>
+        <a href={links.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
+        <a href={links.email}>CONTACT</a>
+      </nav>
+      <p className="billu-note">billu bhai -- here, like always &lt;3</p>
 
       {panel && <InfoPanel key={panel} panel={panel} onClose={closePanel} />}
     </main>
